@@ -19,7 +19,7 @@ import random
 MF_model_list = {'CMF_CAR':ContinuousAutoRegression_large,'CMF_CAR_dkl':CMF_CAR_dkl,"GP":cigp}
 Acq_list = {'UCB': CMF_UCB, 'cfKG': CMF_KG}
 Data_list = {'non_linear_sin': non_linear_sin, 'forrester': forrester, 'Branin':Branin, 'Park':Park, "Currin":Currin,
-             "borehole":borehole, "booth":booth,"hartmann":hartmann,"bohachevsky":bohachevsky,"himmelblau":himmelblau
+             "borehole":borehole, "booth":booth,"bohachevsky":bohachevsky,"himmelblau":himmelblau
              ,"six_hump_camelback":six_hump_camelback,"colvile":colvile}
 
 def MF_BO_continues(exp_config):
@@ -222,8 +222,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
     parser.add_argument("--data_name", type=str, default="non_linear_sin")
     parser.add_argument("--cost_type", type=str, default="pow_10")
+    parser.add_argument("--start_seed", type=int, default=0)
     args = parser.parse_args()
     data_name = args.data_name
+    start = args.start_seed
     
     Exp_marker = 'Norm_res'
     
@@ -236,7 +238,7 @@ if __name__ == '__main__':
     
     logging.basicConfig(filename=log_file_path, filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    for seed in range(10,40):
+    for seed in range(start,30):
         for mf_model in ["CMF_CAR","CMF_CAR_dkl","GP"]:
             for acq in ["UCB","cfKG"]:
                 exp_config = {
