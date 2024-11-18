@@ -145,7 +145,8 @@ def train_AR(ARmodel, data_manager, max_iter=1000, lr_init=1e-1, normal= True, d
 if __name__ == "__main__":
 
     torch.manual_seed(1)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cpu")
     # debugger=log_debugger("AR")
 
     # generate the data
