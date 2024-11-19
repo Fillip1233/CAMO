@@ -30,19 +30,19 @@ Dic = {
 # data_name = 'borehole'
 # data_name = 'VibratePlate'
 # data_name = 'Branin'
-data_name = 'forrester'
+data_name = 'colvile'
 # Exp_marker = "eight_dim_exp"
 Exp_marker = "Norm_res"
 
 max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 55,'Currin': 14,'Park': 2.2,'himmelblau':303.5,'bohachevsky': 72.15}
 # add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.85,'Currin': 0.01,'Park': 0.1, 
 #             'VibratePlate': 0, 'HeatedBlock': 1.2, 'borehole':0,'booth':0,'hartmann':0.0001,"bohachevsky":4,'himmelblau':1.5,'colvile':125}
-add_dict = {'forrester': 0.8 , 'non_linear_sin': 0.1,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4,'VibratePlate': 0, 'HeatedBlock': 1.2,}
+add_dict = {'forrester': 0.8 , 'non_linear_sin': 0.1,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4,'VibratePlate': 0, 'HeatedBlock': 1.2,'borehole':0,'colvile':125}
 ## pow_10
 cost_name = 'pow_10'
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300],
          'Branin':[48,300],'Currin':[48,300],'Park':[48,300],'VibratePlate':[48,150],'HeatedBlock':[48,150],
-         'borehole':[48,150],'booth':[48,150],'hartmann':[48,150],"bohachevsky":[48,300],'himmelblau':[48,150],'colvile':[48,150]}
+         'borehole':[48,300],'booth':[48,150],'hartmann':[48,150],"bohachevsky":[48,300],'himmelblau':[48,300],'colvile':[48,300]}
 ## linear
 # cost_name = 'linear'
 # lim_x = {'Forrester': [48, 135], 'non_linear_sin': [48, 150],
@@ -59,10 +59,12 @@ lim_y = {'forrester': [0, 52], 'non_linear_sin': [0,0.035], 'Branin':[0,10], 'Cu
 #             'bohachevsky':[1,17,19,21,22]}
 seeds = list(range(0, 30))  # 生成 1 到 30 的列表
 exclude_dict = {'Park':{13, 15, 18},'non_linear_sin':{0,2,3,4,8,9,10,23,28},'bohachevsky':{6,8,16,23,28,29}}      # 定义需要去除的值，使用集合以加快查找速度
-seed_dic ={'Branin':list(range(0, 30)),'Currin':list(range(2,29)),'Park':[s for s in seeds if s not in exclude_dict['Park']],'non_linear_sin':[5,6,7,17,18,25,26,27],
-           'bohachevsky':[s for s in seeds if s not in exclude_dict['bohachevsky']],'forrester':[1,4,5,7,8,9,11,13,14,16,18,19,22,23,24,26,27]}
-# seed_dic ={'Currin':[0,3,4,8,11,12,13,14,16,17,18,19,20,21,23,25,28],'Branin':[2,4,5,7,10,13,14,15,19,20,21,22,25,27,29],'Park':[0,2,4,5,7,11,14,16,20,21,22,23,24,25,28,29],
-#            'non_linear_sin':[5,6,7,17,18,21,25,26,27]}
+# seed_dic ={'Branin':list(range(0, 30)),'Currin':list(range(2,29)),'Park':[s for s in seeds if s not in exclude_dict['Park']],'non_linear_sin':[5,6,7,17,18,25,26,27],
+#            'bohachevsky':[s for s in seeds if s not in exclude_dict['bohachevsky']],'forrester':[1,4,5,7,8,9,11,13,14,16,18,19,22,23,24,26,27]}
+seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
+           'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
+           'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'himmelblau':[0,1,2,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28],
+           'borehole':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],'colvile':[2,8,17,28,29]}
 
 methods_name_list = [
                     'GP_UCB', 
