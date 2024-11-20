@@ -19,6 +19,8 @@ Dic = {
         
         'GP_UCB': ['#4169E1', "^", "GP_UCB","dashed"],
         'GP_cfKG': ['#4169E1', "o", "GP_cfKG","dashed"],
+        'GP_dkl_UCB': ['green', "^", "GP_dkl_UCB","dashed"],
+        'GP_dkl_cfKG': ['green', "o", "GP_dkl_cfKG","dashed"],
         
         'CMF_CAR_UCB': ['#FF0000', "^", "CAR_UCB","dashed"], # red
         'CMF_CAR_cfKG': ['#FF0000', "o", "CAR_cfKG","dashed"],
@@ -30,7 +32,7 @@ Dic = {
 # data_name = 'borehole'
 # data_name = 'VibratePlate'
 # data_name = 'Branin'
-data_name = 'colvile'
+data_name = 'Currin'
 # Exp_marker = "eight_dim_exp"
 Exp_marker = "Norm_res"
 
@@ -68,7 +70,9 @@ seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,
 
 methods_name_list = [
                     'GP_UCB', 
+                    'GP_dkl_UCB',
                     'GP_cfKG',
+                    'GP_dkl_cfKG',
                     'CMF_CAR_UCB',
                     'CMF_CAR_cfKG',
                      'CMF_CAR_dkl_UCB', 

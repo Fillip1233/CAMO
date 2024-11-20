@@ -26,14 +26,14 @@ class cigp_dkl(nn.Module):
                                                     nn.LeakyReLU(),
                                                     nn.Linear(input_dim * 4, input_dim * 4),
                                                     nn.LeakyReLU(),
-                                                    nn.Linear(input_dim * 4, input_dim))
+                                                    nn.Linear(input_dim * 4, input_dim)).double()
 
 
     def forward(self, data_manager, x_test, fidelity_indicator = None, normal = False):
         
         
         if fidelity_indicator is not None:
-            x_test1 = torch.cat([x_test1.reshape(-1,x_test1.shape[1]),(torch.tensor(fidelity_indicator)+1).reshape(-1,1)], dim = 1)
+            x_test = torch.cat([x_test.reshape(-1,x_test.shape[1]),(torch.tensor(fidelity_indicator)+1).reshape(-1,1)], dim = 1)
         x_train, y_train = data_manager.get_data(0, normal=normal)
         x_train1 = self.FeatureExtractor(x_train)
         x_test1 = self.FeatureExtractor(x_test)
@@ -84,12 +84,12 @@ class cigp_dkl(nn.Module):
             + 0.5 * y_num * torch.log(2 * torch.tensor(PI)) * y_dimension
         return nll
     
-def train_GP(GPmodel, data_manager, max_iter=100, lr_init=1e-1, normal = False):
+def train_GPdkl(GPmodel, data_manager, max_iter=100, lr_init=1e-1, normal = False):
     optimizer = torch.optim.Adam(GPmodel.parameters(), lr = lr_init)
     for i in range(max_iter):
         optimizer.zero_grad()
         xtr, ytr = data_manager.get_data(0, normal=normal)
-        xtr = GPmodel.FeatureExtractor(xtr)
+        xtr = GPmodel.FeatureExtractor(xtr.double())
         loss = GPmodel.negative_log_likelihood(xtr, ytr)
         loss.backward()
         optimizer.step()
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     myGP = cigp_dkl(input_dim=x.shape[1],kernel = kernel.SquaredExponentialKernel(), log_beta = 1.).to(device)
 
     ## if nonsubset is False, max_iter should be 100 ,lr can be 1e-2
-    train_GP(myGP, fidelity_manager, max_iter=200, lr_init=1e-2)
+    train_GPdkl(myGP, fidelity_manager, max_iter=200, lr_init=1e-2)
 
     # debugger.logger.info('training finished,start predicting')
     with torch.no_grad():
