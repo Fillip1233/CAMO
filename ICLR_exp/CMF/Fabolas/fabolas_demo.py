@@ -8,7 +8,7 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import george
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','..')))
 
 from Data_simulation.Synthetic_MF_Function import *
 # from Data_simulation.Real_Application.HeatedBlock import HeatedBlock
@@ -325,14 +325,18 @@ if __name__ == '__main__':
                 #  'HeatedBlock': HeatedBlock,'VibratePlate': VibPlate
                  }
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
-    parser.add_argument("--data_name", type=str, default="borehole")
+    parser.add_argument("--data_name", type=str, default="Currin")
     parser.add_argument("--cost_type", type=str, default="pow_10")
     args = parser.parse_args()
-    Exp_marker = "borehole_improve"
+    Exp_marker = "Norm_res"
     data_name = args.data_name
     
+    seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
+           'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
+           'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}
+    
     # Set up logging
-    log_file_path = os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type ,'fabolas_improve', 'fabolas.log')
+    log_file_path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type, 'fabolas.log')
     log_dir = os.path.dirname(log_file_path)
 
     if not os.path.exists(log_dir):
@@ -340,7 +344,7 @@ if __name__ == '__main__':
     
     logging.basicConfig(filename=log_file_path, filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    for seed in [12,17]:
+    for seed in seed_dic[data_name]:
         exp_configuration = {'seed': seed, 'data_name': data_name, 'data_model': Data_list[data_name], 'initial_num': [10,4], 'cost_type': args.cost_type,
                              'BO_iterations': 10, 'MF_iterations': 100, 'MF_learning_rate': 0.0001, 'Exp_marker': Exp_marker}
 
