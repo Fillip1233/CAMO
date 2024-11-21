@@ -227,7 +227,7 @@ if __name__ == '__main__':
     data_name = args.data_name
     start = args.start_seed
     
-    Exp_marker = 'Norm_res'
+    Exp_marker = 'Norm_res_60'
     
     # Set up logging
     log_file_path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type , 'experiment.log')
@@ -240,7 +240,7 @@ if __name__ == '__main__':
     
     for seed in range(start,30):
         for mf_model in ["CMF_CAR","CMF_CAR_dkl","GP"]:
-            for acq in ["UCB","cfKG"]:
+            for acq in ["UCB"]:
                 exp_config = {
                             'seed': seed,
                             'data_model': Data_list[args.data_name],
