@@ -32,9 +32,9 @@ Dic = {
 # data_name = 'borehole'
 # data_name = 'VibratePlate'
 # data_name = 'Branin'
-data_name = 'Branin'
+data_name = 'colvile'
 # Exp_marker = "eight_dim_exp"
-Exp_marker = "Norm_res"
+Exp_marker = "Norm_res_60"
 
 max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 55,'Currin': 14,'Park': 2.2,'himmelblau':303.5,'bohachevsky': 72.15}
 # add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.85,'Currin': 0.01,'Park': 0.1, 
@@ -59,24 +59,24 @@ lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300],
 lim_y = {'forrester': [0, 52], 'non_linear_sin': [0,0.035], 'Branin':[0,10], 'Currin':[0,1.75],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32]}
 # seed_dic = {'forrester': [0,1,2,3,5,9], 'non_linear_sin': [1,4,5,6,9], 'Branin':[2,4,5,7,8], 'Currin':[2,3,4,5,6,7,8],'Park':[0,2,4,5,7],'himmelblau':[0,1,2,3,8],
 #             'bohachevsky':[1,17,19,21,22]}
-seeds = list(range(0, 30))  # 生成 1 �? 30 的列�?
+seeds = list(range(0, 30))  # 生成 1 �? 30 的列�?
 exclude_dict = {'Park':{13, 15, 18},'non_linear_sin':{0,2,3,4,8,9,10,23,28},'bohachevsky':{6,8,16,23,28,29}}      # 定义需要去除的值，使用集合以加快查找速度
 # seed_dic ={'Branin':list(range(0, 30)),'Currin':list(range(2,29)),'Park':[s for s in seeds if s not in exclude_dict['Park']],'non_linear_sin':[5,6,7,17,18,25,26,27],
 #            'bohachevsky':[s for s in seeds if s not in exclude_dict['bohachevsky']],'forrester':[1,4,5,7,8,9,11,13,14,16,18,19,22,23,24,26,27]}
 seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
            'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
            'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'himmelblau':[0,1,2,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28],
-           'borehole':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],'colvile':[2,8,17,28,29]}
+           'borehole':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],'colvile':[0,3,4,5,8,9,12,13,14,15,19,20,21,22,24,25,29]}
 
 methods_name_list = [
                     'GP_UCB', 
-                    'GP_dkl_UCB',
-                    'GP_cfKG',
-                    'GP_dkl_cfKG',
+                    # 'GP_dkl_UCB',
+                    # 'GP_cfKG',
+                    # 'GP_dkl_cfKG',
                     'CMF_CAR_UCB',
-                    'CMF_CAR_cfKG',
+                    # 'CMF_CAR_cfKG',
                      'CMF_CAR_dkl_UCB', 
-                     'CMF_CAR_dkl_cfKG',
+                    #  'CMF_CAR_dkl_cfKG',
                     # 'fabolas',
                     # 'smac'
                          ]
@@ -147,8 +147,8 @@ for methods_name in methods_name_list:
     #     fmt=Dic[new_method_name][1],  # 标记样式
     #     markersize=12, 
     #     color=Dic[new_method_name][0], 
-    #     capsize=5,  # 误差条端点长�??
-    #     alpha=0.8  # 线条透明�??
+    #     capsize=5,  # 误差条端点长�??
+    #     alpha=0.8  # 线条透明�??
     #     )
     ax.fill_between(cost_x,
                         mean + add_dict[data_name] - 0.96 * var,

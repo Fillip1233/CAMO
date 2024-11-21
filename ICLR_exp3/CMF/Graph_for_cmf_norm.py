@@ -32,18 +32,18 @@ Dic = {
 # data_name = 'borehole'
 # data_name = 'VibratePlate'
 # data_name = 'Branin'
-data_name = 'Branin'
+data_name = 'Park'
 # Exp_marker = "eight_dim_exp"
 Exp_marker = "Norm_res"
 
-max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 55,'Currin': 14,'Park': 2.2,'himmelblau':303.5,'bohachevsky': 72.15}
+max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 54.75,'Currin': 14,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15}
 # add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.85,'Currin': 0.01,'Park': 0.1, 
 #             'VibratePlate': 0, 'HeatedBlock': 1.2, 'borehole':0,'booth':0,'hartmann':0.0001,"bohachevsky":4,'himmelblau':1.5,'colvile':125}
 add_dict = {'forrester': 0.8 , 'non_linear_sin': 0.1,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4,'VibratePlate': 0, 'HeatedBlock': 1.2,'borehole':0,'colvile':125}
 ## pow_10
 cost_name = 'pow_10'
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300],
-         'Branin':[48,300],'Currin':[48,300],'Park':[48,300],'VibratePlate':[48,150],'HeatedBlock':[48,150],
+         'Branin':[0,300],'Currin':[48,300],'Park':[0,300],'VibratePlate':[48,150],'HeatedBlock':[48,150],
          'borehole':[48,300],'booth':[48,150],'hartmann':[48,150],"bohachevsky":[48,300],'himmelblau':[48,300],'colvile':[48,300]}
 ## linear
 # cost_name = 'linear'
@@ -70,15 +70,15 @@ seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,
 
 methods_name_list = [
                     'GP_UCB', 
-                    'GP_dkl_UCB',
+                    # 'GP_dkl_UCB',
                     'GP_cfKG',
-                    'GP_dkl_cfKG',
+                    # 'GP_dkl_cfKG',
                     'CMF_CAR_UCB',
                     'CMF_CAR_cfKG',
                      'CMF_CAR_dkl_UCB', 
                      'CMF_CAR_dkl_cfKG',
-                    # 'fabolas',
-                    # 'smac'
+                    'fabolas',
+                    'smac'
                          ]
 
 line = []
@@ -88,15 +88,17 @@ for methods_name in methods_name_list:
     print(methods_name)
     cost_collection = []
     inter_collection = []
-    if data_name in ['bohachevsky']:
-        smac_dict =[1,17,19,21,22]
-    else:
-        smac_dict = [0,1,2,3,4]
+    # if data_name in ['bohachevsky']:
+    #     smac_dict =[1,17,19,21,22]
+    # else:
+    #     smac_dict = [0,1,2,3,4]
     if methods_name in ['smac']:
-        for seed in smac_dict:
+        # for seed in smac_dict:
+        for seed in seed_dic[data_name]:
             path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results',Exp_marker,
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
+            data['cost'] = data['cost'].astype(str).str.extract(r'tensor\(([\d\.]+)\)').astype(float)
             cost = data['cost'].to_numpy()
             SR = data['SR'].to_numpy()
             inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")

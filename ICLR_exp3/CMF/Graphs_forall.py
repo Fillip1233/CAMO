@@ -97,7 +97,7 @@ Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
 data_list = ['Branin', 'Currin', 'Park', 'non_linear_sin', 'Forrester','bohachevsky']
 cost_name = 'pow_10'
 
-max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 55,'Currin': 14,'Park': 2.2,'himmelblau':303.5,'bohachevsky': 72.15}
+max_dic = {'forrester': 48.4495, 'non_linear_sin':0.03338,'Branin': 54.75,'Currin': 13.798,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15}
 add_dic = {'forrester': 0.8 , 'non_linear_sin': 0,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4}
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300], 'Branin':[48,300],'Currin':[48,300],'Park':[48,300], 'himmelblau':[48, 300],'bohachevsky':[48,300]}
 lim_y = {'forrester': [0, 40], 'non_linear_sin': [0,0.04], 'Branin':[0,10], 'Currin':[0,3],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32]}
@@ -111,7 +111,7 @@ cmf_methods_name_list = [
                         'GP_UCB','GP_cfKG',
                         'CMF_CAR_UCB','CMF_CAR_cfKG',
                         'CMF_CAR_dkl_UCB','CMF_CAR_dkl_cfKG',
-                        # 'fabolas',
+                        'fabolas',
                         # 'smac'
                          ]
 Exp_marker = 'Norm_res'
@@ -137,8 +137,8 @@ ax6 = plt.subplot(gs[1, 4:6])
 draw_plots(ax1, 'Branin', cmf_methods_name_list, Exp_marker)
 draw_plots(ax2, 'Currin', cmf_methods_name_list, Exp_marker)
 draw_plots(ax3, 'Park', cmf_methods_name_list, Exp_marker)
-draw_plots(ax4, 'non_linear_sin', cmf_methods_name_list[:-1], Exp_marker)
-draw_plots(ax5, 'forrester', cmf_methods_name_list[:-1], Exp_marker)
+draw_plots(ax4, 'non_linear_sin', cmf_methods_name_list, Exp_marker)
+draw_plots(ax5, 'forrester', cmf_methods_name_list, Exp_marker)
 draw_plots(ax6, 'bohachevsky', cmf_methods_name_list, Exp_marker)
 
 lines, labels = ax1.get_legend_handles_labels()
