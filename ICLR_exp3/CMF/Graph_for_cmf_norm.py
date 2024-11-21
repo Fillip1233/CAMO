@@ -32,7 +32,7 @@ Dic = {
 # data_name = 'borehole'
 # data_name = 'VibratePlate'
 # data_name = 'Branin'
-data_name = 'Currin'
+data_name = 'Branin'
 # Exp_marker = "eight_dim_exp"
 Exp_marker = "Norm_res"
 

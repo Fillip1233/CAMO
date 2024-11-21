@@ -225,7 +225,7 @@ def MF_BO_continues(exp_config):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
-    parser.add_argument("--data_name", type=str, default="Currin")
+    parser.add_argument("--data_name", type=str, default="Branin")
     parser.add_argument("--cost_type", type=str, default="pow_10")
     parser.add_argument("--start_seed", type=int, default=0)
     args = parser.parse_args()
