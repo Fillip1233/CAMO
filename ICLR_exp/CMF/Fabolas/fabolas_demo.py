@@ -51,7 +51,7 @@ def fabolas(exp_config):
         s = np.rint(2 ** (s_transform * (np.log2(s_max) - np.log2(s_min)) + np.log2(s_min)))
         return int(s)
 
-    '''fabolas 有不同的数据组成结构'''
+    '''fabolas 鏈変笉鍚岀殑鏁版嵁缁勬垚缁撴瀯'''
 
     # x = np.random.rand(32)[:, None]
     s_min = 1
@@ -72,7 +72,7 @@ def fabolas(exp_config):
 
     # xtr = torch.cat((xtr, s_index), dim=1)
 
-    '''进入fabolas的循环'''
+    '''杩涘叆fabolas鐨勫惊鐜�'''
     logger = logging.getLogger(__name__)
     n_dims = data.x_dim
     lower = np.array([data.search_range[i][0] for i in range(n_dims)])
@@ -313,8 +313,8 @@ def fabolas(exp_config):
     if not os.path.exists(path_csv):
         os.makedirs(path_csv)
 
-    df = pd.DataFrame(recording)  # 数据初始化成为DataFrame对象
-    # df.to_csv(path_csv + '/demo.csv', index=False)  # 将数据写入
+    df = pd.DataFrame(recording)  # 鏁版嵁鍒濆鍖栨垚涓篋ataFrame瀵硅薄
+    # df.to_csv(path_csv + '/demo.csv', index=False)  # 灏嗘暟鎹啓鍏�
     df.to_csv(path_csv + '/fabolas_seed_' + str(seed) + '.csv',
             index=False)
 
@@ -331,9 +331,11 @@ if __name__ == '__main__':
     Exp_marker = "Norm_res"
     data_name = args.data_name
     
-    seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
+    seed_dic ={'Currin':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
            'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
-           'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}
+           'bohachevsky':[0,1,2,3,4,7,8,9,10,11,12,15,17,19,21,22,24,26,27],'himmelblau':[14,15,16,17,18,19,20,22,23,24,25,26,27,28],
+           'borehole':[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],
+           'colvile':[14,15,19,20,21,22,24,25,29]}
     
     # Set up logging
     log_file_path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type, 'fabolas.log')

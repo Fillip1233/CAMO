@@ -20,12 +20,12 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
         cost_collection = []
         inter_collection = []
         
-        if data_name in ['bohachevsky']:
-            smac_dict =[1,17,19,21,22]
-        else:
-            smac_dict = [0,1,2,3,4]
+        # if data_name in ['bohachevsky']:
+        #     smac_dict =[1,17,19,21,22]
+        # else:
+        #     smac_dict = [0,1,2,3,4]
         if methods_name in ['smac']:
-            for seed in smac_dict:
+            for seed in seed_dic[data_name]:
                 path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results',exp_marker,
                                     data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
                 data = pd.DataFrame(pd.read_csv(path))
@@ -65,11 +65,26 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
         
         axs.plot(cost_x, mean + add_dic[data_name], ls=Dic[new_method_name][-1], color=Dic[new_method_name][0],
                     label=Dic[new_method_name][2],
-                    marker=Dic[new_method_name][1], markersize=12, markevery=17)
+                    marker=Dic[new_method_name][1], markersize=12, markevery=60)
         axs.fill_between(cost_x,
                         mean + add_dic[data_name] - 0.96 * var,
                         mean + add_dic[data_name] + 0.96 * var,
                         alpha=0.05, color=Dic[new_method_name][0])
+        # markevery_indices = range(0, len(cost_x), 180)
+        # errorbar_x = [cost_x[i] for i in markevery_indices]
+        # errorbar_y = [mean[i] + add_dic[data_name] for i in markevery_indices]
+        # errorbar_yerr = [0.96 * var[i] for i in markevery_indices]
+
+        # axs.errorbar(
+        #     errorbar_x, 
+        #     errorbar_y, 
+        #     yerr=errorbar_yerr, 
+        #     fmt=Dic[new_method_name][1],  # 鏍囪鏍峰紡
+        #     markersize=12, 
+        #     color=Dic[new_method_name][0], 
+        #     capsize=5,  # 璇樊鏉＄鐐归暱锟�??
+        #     alpha=0.8  # 绾挎潯閫忔槑锟�??
+        #     )
 
 
     axs.set_xlabel("Cost", fontsize=25)
@@ -98,32 +113,35 @@ data_list = ['Branin', 'Currin', 'Park', 'non_linear_sin', 'Forrester','bohachev
 cost_name = 'pow_10'
 
 max_dic = {'forrester': 48.4495, 'non_linear_sin':0.03338,'Branin': 54.75,'Currin': 13.798,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15}
-add_dic = {'forrester': 0.8 , 'non_linear_sin': 0,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4}
+add_dic = {'forrester': 0.8 , 'non_linear_sin': 0,'Branin': 0.9,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4}
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300], 'Branin':[48,300],'Currin':[48,300],'Park':[48,300], 'himmelblau':[48, 300],'bohachevsky':[48,300]}
 lim_y = {'forrester': [0, 40], 'non_linear_sin': [0,0.04], 'Branin':[0,10], 'Currin':[0,3],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32]}
 # seed_dic = {'forrester': [0,1,2,3,5,9], 'non_linear_sin': [1,4,5,6,9], 'Branin':[2,4,5,7,8], 'Currin':[2,3,4,5,6,7,8],'Park':[0,2,4,5,7],'himmelblau':[0,1,2,3,8],
 #             'bohachevsky':[1,17,19,21,22]}
-seed_dic ={'Currin':[0,2,3,4,6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
-           'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
-           'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}
+seed_dic ={'Currin':[6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],##24
+           'Branin':[4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],##23
+           'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],##20
+           'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],#19
+           'forrester':[2,4,5,9,11,13,14,15,16,17,18,19,21,22,23,24,25,27,28,29],##21
+           'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}##18
 
 cmf_methods_name_list = [  
                         'GP_UCB','GP_cfKG',
                         'CMF_CAR_UCB','CMF_CAR_cfKG',
                         'CMF_CAR_dkl_UCB','CMF_CAR_dkl_cfKG',
                         'fabolas',
-                        # 'smac'
+                        'smac'
                          ]
 Exp_marker = 'Norm_res'
 
 
-fig = plt.figure(figsize=(25, 13))
+fig = plt.figure(figsize=(30, 16))
 
 # 创建图形
 gs = gridspec.GridSpec(2, 6) # 创立2 * 6 网格
-gs.update(wspace=0.8)
+gs.update(wspace=0.9)
 
-# 对第一行进行绘制
+# 对第一行进行绘�?
 ax1 = plt.subplot(gs[0,  :2]) # gs(哪一行，绘制网格列的范围)
 ax2 = plt.subplot(gs[0, 2:4])
 ax3 = plt.subplot(gs[0, 4:6])
@@ -133,16 +151,22 @@ ax4 = plt.subplot(gs[1, :2])
 ax5 = plt.subplot(gs[1, 2:4])
 ax6 = plt.subplot(gs[1, 4:6])
 
-# 开始画图
+# 开始画�?
 draw_plots(ax1, 'Branin', cmf_methods_name_list, Exp_marker)
+ax1.text(0.5, 1.02, 'Branin', transform=ax1.transAxes, ha='center', fontsize=25)
 draw_plots(ax2, 'Currin', cmf_methods_name_list, Exp_marker)
+ax2.text(0.5, 1.02, 'Currin', transform=ax2.transAxes, ha='center', fontsize=25)
 draw_plots(ax3, 'Park', cmf_methods_name_list, Exp_marker)
+ax3.text(0.5, 1.02, 'Park', transform=ax3.transAxes, ha='center', fontsize=25)
 draw_plots(ax4, 'non_linear_sin', cmf_methods_name_list, Exp_marker)
+ax4.text(0.5, 1.02, 'Non-linear Sin', transform=ax4.transAxes, ha='center', fontsize=25)
 draw_plots(ax5, 'forrester', cmf_methods_name_list, Exp_marker)
+ax5.text(0.5, 1.02, 'Forrester', transform=ax5.transAxes, ha='center', fontsize=25)
 draw_plots(ax6, 'bohachevsky', cmf_methods_name_list, Exp_marker)
+ax6.text(0.5, 1.02, 'Bohachevsky', transform=ax6.transAxes, ha='center', fontsize=25)
 
 lines, labels = ax1.get_legend_handles_labels()
-leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.0), fancybox=True, mode='normal', ncol=3, markerscale = 1.5, fontsize=25)
+leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.0), fancybox=True, mode='normal', ncol=4, markerscale = 1.5, fontsize=25)
 
 # change the line width for the legend
 for line in leg.get_lines():
