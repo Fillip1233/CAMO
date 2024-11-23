@@ -97,7 +97,7 @@ if __name__ == "__main__":
         recording["cost"].append(0)
         t1 =time.time()
 
-        data_config = {"data_name": data_name, "data_model": Data_list[data_name], "cost_type": "pow_10", "total_fidelity_num": 2}
+        data_config = {"data_name": data_name, "data_model": Data_list[data_name], "cost_type": "linear", "total_fidelity_num": 2}
         model = SyntheticFunction(data_config, seed = seed)
 
         # Scenario object specifying the optimization "environment"
@@ -146,7 +146,7 @@ if __name__ == "__main__":
             recording["time"].append(t4-t3)
 
         df = pd.DataFrame(recording)
-        directory = 'smac_result/' + data_name + '/'
+        directory = 'smac_result/' + data_name + '/'+ 'linear/'
         if not os.path.exists(directory):
             os.makedirs(directory)
-        df.to_csv('smac_result/' + data_name + '/smac_seed_' + str(seed) + '.csv', index=False)
+        df.to_csv(directory + '/smac_seed_' + str(seed) + '.csv', index=False)

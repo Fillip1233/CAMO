@@ -20,8 +20,8 @@ class cost_discrete():
     
     def compute_gp_cost(self, dataset):
         C = 0
-        for i in range(len(dataset[0])):
-            C += self.compute_cost(dataset[0][i][-1]-1)
+        for i in range(len(dataset)):
+            C += self.compute_cost(dataset[i][-1])
         return C
 
     def compute_index(self, index):
