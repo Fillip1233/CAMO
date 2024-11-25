@@ -14,30 +14,18 @@ def get_data(type, data_name, method_name, file_name):
 
 
 # UCB * EI s cfkg o
-Dic = {'AR_UCB': ['#000080', "^", "AR-MF-UCB", "solid"],
-       'AR_EI': ['#000080', "s", "AR-MF-EI", "solid"],
-       'AR_cfKG': ['#000080', "X", "AR-cfKG", "solid"],
-       'ResGP_UCB': ['#00CCFF', "^", "ResGP-MF-UCB", "solid"],
-       'ResGP_EI': ['#00CCFF', "s", "ResGP-MF-EI", "solid"],
-       'ResGP_cfKG': ['#00CCFF', "X", "ResGP-cfKG", "solid"],
-        
-        'DNN_MFBO': ['#228B22', "*", "DNN", "solid"],
-        
-        # 'GP_UCB': ['#4169E1', "^", "MF-GP-UCB", "solid"],
-        # 'GP_EI': ['#4169E1', "s", "GP-MF-EI", "solid"],
-        # 'GP_cfKG': ['#4169E1', "X", "cfKG", "solid"],
-        
-        'GP_UCB': ['#4169E1', "^", "BOCA", "solid"],
-        'GP_cfKG': ['#4169E1', "X", "cfKG", "solid"],
-        
-        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-BOCA", "dashed"], # red
-        'CMF_CAR_cfKG': ['#FF0000', "X", "CAMO-cfKG", "dashed"],
-        'CMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-BOCA", "dashed"], # orange
-        'CMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", "dashed"],
-        
-        'fabolas':['#808000', "*", "Fabolas", 'solid'],
-        'smac':['#006400', "*", "SMAC3", 'solid'],
-        }
+Dic = {
+    'fabolas': ['#808000', "*", "Fabolas", 'solid'],  # 深红 + 五边形
+    'smac': ['#2E8B57', "H", "SMAC3", 'dashdot'],     # 深绿色 + 六边形
+    
+    'GP_UCB': ['#1E90FF', "s", "BOCA", 'solid'],       # 深蓝 + 方形
+    'GP_cfKG': ['#1E90FF', "o", "cfKG", 'solid'],      # 深蓝 + 圆形
+    
+    'CMF_CAR_UCB': ['#FF4500', "D", "CAMO-BOCA", 'dashed'],   # 橙红 + 菱形
+    'CMF_CAR_cfKG': ['#FF4500', "v", "CAMO-cfKG", 'dashed'],  # 橙红 + 下三角形
+    'CMF_CAR_dkl_UCB': ['#BA55D3', "p", "CAMO-DKL-BOCA", 'solid'],  # 淡紫色 + 五边形
+    'CMF_CAR_dkl_cfKG': ['#BA55D3', "^", "CAMO-DKL-cfKG", 'dashed'],  # 淡紫色 + 上三角形
+}
 
 
 
@@ -191,11 +179,11 @@ for kk in range(3):
 
 # 共享图例
 lines, labels = axs[0].get_legend_handles_labels()
-leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=6, markerscale = 1.3, fontsize=25)
+# leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=6, markerscale = 1.3, fontsize=25)
 
 # change the line width for the legend
-for line in leg.get_lines():
-    line.set_linewidth(2.5)
+# for line in leg.get_lines():
+#     line.set_linewidth(2.5)
 
 plt.tight_layout()
 plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' +'CMF_' + data_name + '_cost.pdf', bbox_inches='tight')

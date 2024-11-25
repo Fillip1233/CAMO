@@ -14,17 +14,18 @@ def get_data(type, data_name, method_name, file_name):
 
 
 # UCB * EI s cfkg o
-Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
-        'smac':['#006400', "*", "SMAC3", 'solid'],
-        
-        'GP_UCB': ['#4169E1', "^", "BOCA", 'solid'],
-        'GP_cfKG': ['#4169E1', "X", "cfKG", 'solid'],
-        
-        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-BOCA", 'dashed'], # red
-        'CMF_CAR_cfKG': ['#FF0000', "X", "CAMO-cfKG", 'dashed'],
-        'CMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-BOCA", 'dashed'], # orange
-        'CMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", 'dashed'],
-        }
+Dic = {
+    'fabolas': ['#808000', "*", "Fabolas", 'solid'],  # 深红 + 五边形
+    'smac': ['#2E8B57', "H", "SMAC3", 'dashdot'],     # 深绿色 + 六边形
+    
+    'GP_UCB': ['#1E90FF', "s", "BOCA", 'solid'],       # 深蓝 + 方形
+    'GP_cfKG': ['#1E90FF', "o", "cfKG", 'solid'],      # 深蓝 + 圆形
+    
+    'CMF_CAR_UCB': ['#FF4500', "D", "CAMO-BOCA", 'dashed'],   # 橙红 + 菱形
+    'CMF_CAR_cfKG': ['#FF4500', "v", "CAMO-cfKG", 'dashed'],  # 橙红 + 下三角形
+    'CMF_CAR_dkl_UCB': ['#BA55D3', "p", "CAMO-DKL-BOCA", 'solid'],  # 淡紫色 + 五边形
+    'CMF_CAR_dkl_cfKG': ['#BA55D3', "^", "CAMO-DKL-cfKG", 'dashed'],  # 淡紫色 + 上三角形
+}
 
 
 add_dic = {'VibratePlate': 0, 'HeatedBlock': 0}
