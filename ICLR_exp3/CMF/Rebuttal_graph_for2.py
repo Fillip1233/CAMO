@@ -31,8 +31,9 @@ max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 55,'Currin': 14,'Park':
 add_dic = {'colvile': 125, 'himmelblau': 1,'borehole':4}
 lim_x = {'borehole':[48,300],'colvile': [48, 300], 'himmelblau': [48, 300]}
 lim_y = {'borehole':[0, 110],'colvile': [0, 425], 'himmelblau': [0, 150]}
-seed_dic = {'himmelblau':[0,1,2,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28],
-           'borehole':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],
+seed_dic = {'himmelblau':[0,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,28],
+        #    'borehole':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],
+            'borehole':[3,4,6,8,9,10,17,20,22,23,24,25,26,28,29],
            'colvile':[0,3,4,5,8,9,12,13,14,15,19,20,21,22,24,25,29]}
 
 
@@ -77,7 +78,7 @@ for kk in range(3):
     
         ll = axs[kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=17)
+                    marker=Dic[methods_name][1], markersize=12,markevery=25)
         axs[kk].fill_between(cost_x,
                         mean + add_dic[data_name] - 0.96 * var,
                         mean + add_dic[data_name] + 0.96 * var,
@@ -88,7 +89,9 @@ for kk in range(3):
     axs[kk].set_xlim(lim_x[data_name][0], lim_x[data_name][1])
     axs[kk].set_ylim(lim_y[data_name][0], lim_y[data_name][1])
     axs[kk].tick_params(axis='both', labelsize=20)
+    axs[kk].text(0.5, 1.02, data_name, transform=axs[kk].transAxes, ha='center', fontsize=25)
     axs[kk].grid()
+
 
 lines, labels = axs[0].get_legend_handles_labels()
 leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.23), fancybox=True, mode='normal', ncol=4, markerscale = 1.5, fontsize=25)

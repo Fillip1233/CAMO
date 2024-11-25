@@ -125,7 +125,7 @@ def paint_cmf_query(axs):
     axs.bar(methods_name_list, values_mean, yerr=values_std, capsize=15, color=colors,width = 0.6)
     for i in range(len(methods_name_list)):
         if methods_name_list[i] == 'smac':
-            axs.text(i, values_mean[i], f"{0.01}",ha='center', va='bottom', fontsize=25)
+            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=25)
         else:
             axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
     axs.set_xticklabels([Dic[i][2] for i in methods_name_list], rotation=45, ha='right', fontsize=30)
@@ -192,7 +192,7 @@ def paint_cmf_training(axs):
     axs.bar(labels, values_mean, yerr=values_std, capsize=15, color=colors, width = 0.6)
     for i in range(len(labels)):
         if labels[i] == 'SMAC3':
-            axs.text(i, values_mean[i], f"{0.01}",ha='center', va='bottom', fontsize=25)
+            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=25)
         else:
             axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
     axs.set_xticklabels(labels, rotation=45, ha='right', fontsize=30)
@@ -212,7 +212,7 @@ paint_dmf_training(axs[2])
 paint_cmf_training(axs[3])
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'paper_yx') + '/query_time_heng' + '.eps',
+plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'paper_yx') + '/query_time_heng' + '.pdf',
             bbox_inches='tight')
 
 

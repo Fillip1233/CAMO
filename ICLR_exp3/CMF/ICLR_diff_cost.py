@@ -44,7 +44,7 @@ Dic = {'AR_UCB': ['#000080', "^", "AR-MF-UCB", "solid"],
 max_dic = {'Branin': 55,'Currin': 13.798,'Park': 2.2, 'VibratePlate': 250, 'HeatedBlock': 2,'bohachevsky': 72.15,'borehole':0}
 add_dict = {'Branin': 3,'Currin': 0.02,'Park': 0.3, 'VibratePlate': 0, 'HeatedBlock': 0,'bohachevsky': 4,'borehole':0}
 cost_lim_y = {'Branin': [2,12], 'Currin': [0, 3], 'Park': [0.2, 1.4],'bohachevsky': [0, 32], 'borehole': [0, 0.5]}
-cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 300], 'Park': [13, 300],'bohachevsky': [13, 300], 'borehole': [13, 300]}
+cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 150], 'Park': [13, 300],'bohachevsky': [13, 150], 'borehole': [13, 300]}
 
 
 ##Branin
@@ -52,7 +52,7 @@ cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 300], 'Park': [13, 300],'bohac
 # seed_dic ={'pow_10':[2,4,5,7,8],'linear':[4,5,7,8],'log':[2,3,5,7,8]}
 ##Currin
 # data_name = 'Currin'
-# seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
+# seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
 #            'log':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28]}
 ##Park
 # data_name = 'Park'
@@ -60,7 +60,7 @@ cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 300], 'Park': [13, 300],'bohac
 
 ##bohachevsky
 data_name = 'bohachevsky'
-seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24,26,27],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}
+seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
 
 ##
 # data_name = 'borehole'
@@ -69,14 +69,15 @@ seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0
 methods_name_list = [ 
                      'GP_UCB', 
                      'GP_cfKG',
-                    #  'fabolas','smac',
+                     'fabolas',
+                    'smac',
                      'CMF_CAR_UCB',
                     #  'CMF_CAR_cfKG',
                         
                      'CMF_CAR_dkl_UCB',
                     #  'CMF_CAR_dkl_cfKG'
                     ]
-baseline_list = ['fabolas','smac']
+# baseline_list = ['fabolas','smac']
 
 cost_list = ['log', 'linear', 'pow_10']
 cost_label_dic = {'log': 'Log', 'linear': 'Linear', 'pow_10': 'Power 10'}
@@ -90,7 +91,7 @@ for kk in range(3):
         print(methods_name)
         cost_collection = []
         # SR_collection = []
-        inter_collection = []
+        inter_collection = []  
         for seed in seed_dic[cost_name]:
             path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results',Exp_marker,
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
@@ -115,12 +116,12 @@ for kk in range(3):
         mean = np.mean(SR_new, axis=0)
         var = np.std(SR_new, axis=0)
         if  cost_name == 'log':
-            if methods_name in ['CMF_CAR_UCB','CMF_CAR_cfKG','CMF_CAR_dkl_UCB', 'CMF_CAR_dkl_cfKG']:
-                makervery_index = 360
+            if methods_name in ['fabolas']:
+                makervery_index = 120
             else:
                 makervery_index = 360
         elif  cost_name == 'linear':
-            makervery_index = 60
+            makervery_index = 30
         else:
             makervery_index = 30
         ll = axs[kk].plot(cost_x, mean + add_dict[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],

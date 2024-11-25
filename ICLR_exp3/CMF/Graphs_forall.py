@@ -65,11 +65,11 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
         
         axs.plot(cost_x, mean + add_dic[data_name], ls=Dic[new_method_name][-1], color=Dic[new_method_name][0],
                     label=Dic[new_method_name][2],
-                    marker=Dic[new_method_name][1], markersize=12, markevery=60)
+                    marker=Dic[new_method_name][1], markersize=12, markevery=30)
         axs.fill_between(cost_x,
                         mean + add_dic[data_name] - 0.96 * var,
                         mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[new_method_name][0])
+                        alpha=0.07, color=Dic[new_method_name][0])
         # markevery_indices = range(0, len(cost_x), 180)
         # errorbar_x = [cost_x[i] for i in markevery_indices]
         # errorbar_y = [mean[i] + add_dic[data_name] for i in markevery_indices]
