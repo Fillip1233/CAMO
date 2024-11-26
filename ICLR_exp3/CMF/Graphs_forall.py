@@ -177,4 +177,5 @@ for line in leg.get_lines():
 plt.tight_layout()
 # plt.savefig(os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Graph_show') + '/' + 'CMF_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
 # plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'CMF', 'exp_521') + '/' + 'CMF_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.pdf', bbox_inches='tight')
+# plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.png', bbox_inches='tight')

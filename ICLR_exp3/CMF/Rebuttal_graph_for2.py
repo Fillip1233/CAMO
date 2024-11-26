@@ -105,4 +105,4 @@ plt.tight_layout()
 # plt.savefig(os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Graph_show') + '/' + 'CMF_rebuttal3_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
 # plt.savefig(os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Graph_show') + '/' + 'CMF_rebuttal3_' + cost_name +'_SR_together.eps', bbox_inches='tight')
 
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF','Graphs') + '/' + 'CMF_rebuttal3_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF','Graphs') + '/' + 'CMF_rebuttal3_' + cost_name +'_SR_together.png', bbox_inches='tight')

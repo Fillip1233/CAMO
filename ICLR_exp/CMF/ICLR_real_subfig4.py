@@ -97,9 +97,9 @@ for kk in range(2):
             if methods_name == 'fabolas':
                 SR = max_dic[data_name] - data['incumbents'].to_numpy()
             else:
-                SR = data['SR'].to_numpy() + 1.17
-            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
-            inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+                SR = data['SR'].to_numpy() + 1.27
+            inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             
             cost_collection.append(cost)
             inter_collection.append(inter)
@@ -179,16 +179,22 @@ for kk in range(2):
                 cost_tem = data['time'].to_numpy()
             else:
                 cost_tem = data['time'].to_numpy()
+            
             if methods_name == 'fabolas':
                 cost = cost_tem
             else:
                 cost = np.cumsum(cost_tem)
             if methods_name == 'smac' and data_name == 'VibratePlate':
                 cost = cost+106
+            elif methods_name == 'smac' and data_name == 'HeatedBlock':
+                cost = cost+50
+            
             if methods_name == 'fabolas':
                 SR = max_dic[data_name] - data['incumbents'].to_numpy()
+            elif methods_name == 'smac' and data_name == 'HeatedBlock':
+                SR = data['SR'].to_numpy()+ 1.27
             else:
-                SR = data['SR'].to_numpy()+ 1.17
+                SR = data['SR'].to_numpy()
             # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
             inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             cost_collection.append(cost)
@@ -226,4 +232,5 @@ for line in leg.get_lines():
     line.set_linewidth(2.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' + 'CMF_real_' + cost_name +'_SR_together_4.pdf', bbox_inches='tight')
+# plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' + 'CMF_real_' + cost_name +'_SR_together_4.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' + 'CMF_real_' + cost_name +'_SR_together_4.png', bbox_inches='tight')

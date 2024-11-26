@@ -39,16 +39,16 @@ cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 150], 'Park': [13, 300],'bohac
 # data_name = 'Branin'
 # seed_dic ={'pow_10':[2,4,5,7,8],'linear':[4,5,7,8],'log':[2,3,5,7,8]}
 ##Currin
-# data_name = 'Currin'
-# seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
-#            'log':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28]}
+data_name = 'Currin'
+seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
+           'log':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28]}
 ##Park
 # data_name = 'Park'
 # seed_dic ={'pow_10':[0,2,4,5,7],'linear':[0,4,7,9],'log':[0,1,2,3,4,7]}
 
 ##bohachevsky
-data_name = 'bohachevsky'
-seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
+# data_name = 'bohachevsky'
+# seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
 
 ##
 # data_name = 'borehole'
@@ -186,4 +186,4 @@ lines, labels = axs[0].get_legend_handles_labels()
 #     line.set_linewidth(2.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' +'CMF_' + data_name + '_cost.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' +'CMF_' + data_name + '_cost.png', bbox_inches='tight')

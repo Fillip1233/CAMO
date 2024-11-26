@@ -113,4 +113,4 @@ for line in leg.get_lines():
     line.set_linewidth(2.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF','Graphs') + '/' + 'DKL3_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF','Graphs') + '/' + 'DKL3_' + cost_name +'_SR_together.png', bbox_inches='tight')

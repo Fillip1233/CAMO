@@ -212,7 +212,7 @@ paint_dmf_training(axs[2])
 paint_cmf_training(axs[3])
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'paper_yx') + '/query_time_heng' + '.pdf',
+plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'paper_yx') + '/query_time_heng' + '.png',
             bbox_inches='tight')
 
 
