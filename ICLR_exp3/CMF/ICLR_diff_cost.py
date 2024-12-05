@@ -14,53 +14,41 @@ def get_data(type, data_name, method_name, file_name):
 
 
 # UCB * EI s cfkg o
-Dic = {'AR_UCB': ['#000080', "^", "AR-MF-UCB", "solid"],
-       'AR_EI': ['#000080', "s", "AR-MF-EI", "solid"],
-       'AR_cfKG': ['#000080', "X", "AR-cfKG", "solid"],
-       'ResGP_UCB': ['#00CCFF', "^", "ResGP-MF-UCB", "solid"],
-       'ResGP_EI': ['#00CCFF', "s", "ResGP-MF-EI", "solid"],
-       'ResGP_cfKG': ['#00CCFF', "X", "ResGP-cfKG", "solid"],
-        
-        'DNN_MFBO': ['#228B22', "*", "DNN", "solid"],
-        
-        # 'GP_UCB': ['#4169E1', "^", "MF-GP-UCB", "solid"],
-        # 'GP_EI': ['#4169E1', "s", "GP-MF-EI", "solid"],
-        # 'GP_cfKG': ['#4169E1', "X", "cfKG", "solid"],
-        
-        'GP_UCB': ['#4169E1', "^", "BOCA", "solid"],
-        'GP_cfKG': ['#4169E1', "X", "cfKG", "solid"],
-        
-        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-BOCA", "dashed"], # red
-        'CMF_CAR_cfKG': ['#FF0000', "X", "CAMO-cfKG", "dashed"],
-        'CMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-BOCA", "dashed"], # orange
-        'CMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", "dashed"],
-        
-        'fabolas':['#808000', "*", "Fabolas", 'solid'],
-        'smac':['#006400', "*", "SMAC3", 'solid'],
-        }
+Dic = {
+    'fabolas': ['#808000', "*", "Fabolas", 'solid'],  # 深红 + 五边形
+    'smac': ['#2E8B57', "H", "SMAC3", 'dashdot'],     # 深绿色 + 六边形
+    
+    'GP_UCB': ['#1E90FF', "s", "BOCA", 'solid'],       # 深蓝 + 方形
+    'GP_cfKG': ['#1E90FF', "o", "cfKG", 'solid'],      # 深蓝 + 圆形
+    
+    'CMF_CAR_UCB': ['#FF4500', "D", "CAMO-BOCA", 'dashed'],   # 橙红 + 菱形
+    'CMF_CAR_cfKG': ['#FF4500', "v", "CAMO-cfKG", 'dashed'],  # 橙红 + 下三角形
+    'CMF_CAR_dkl_UCB': ['#BA55D3', "p", "CAMO-DKL-BOCA", 'solid'],  # 淡紫色 + 五边形
+    'CMF_CAR_dkl_cfKG': ['#BA55D3', "^", "CAMO-DKL-cfKG", 'dashed'],  # 淡紫色 + 上三角形
+}
 
 
 
 max_dic = {'Branin': 55,'Currin': 13.798,'Park': 2.2, 'VibratePlate': 250, 'HeatedBlock': 2,'bohachevsky': 72.15,'borehole':0}
 add_dict = {'Branin': 3,'Currin': 0.02,'Park': 0.3, 'VibratePlate': 0, 'HeatedBlock': 0,'bohachevsky': 4,'borehole':0}
 cost_lim_y = {'Branin': [2,12], 'Currin': [0, 3], 'Park': [0.2, 1.4],'bohachevsky': [0, 32], 'borehole': [0, 0.5]}
-cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 300], 'Park': [13, 300],'bohachevsky': [13, 300], 'borehole': [13, 300]}
+cost_lim_x = {'Branin': [13, 300], 'Currin': [13, 150], 'Park': [13, 300],'bohachevsky': [13, 150], 'borehole': [13, 300]}
 
 
 ##Branin
 # data_name = 'Branin'
 # seed_dic ={'pow_10':[2,4,5,7,8],'linear':[4,5,7,8],'log':[2,3,5,7,8]}
 ##Currin
-# data_name = 'Currin'
-# seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
-#            'log':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28]}
+data_name = 'Currin'
+seed_dic ={'pow_10':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,28],'linear':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],
+           'log':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28]}
 ##Park
 # data_name = 'Park'
 # seed_dic ={'pow_10':[0,2,4,5,7],'linear':[0,4,7,9],'log':[0,1,2,3,4,7]}
 
 ##bohachevsky
-data_name = 'bohachevsky'
-seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24,26,27],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27]}
+# data_name = 'bohachevsky'
+# seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
 
 ##
 # data_name = 'borehole'
@@ -69,14 +57,15 @@ seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0
 methods_name_list = [ 
                      'GP_UCB', 
                      'GP_cfKG',
-                    #  'fabolas','smac',
+                     'fabolas',
+                    'smac',
                      'CMF_CAR_UCB',
                     #  'CMF_CAR_cfKG',
                         
                      'CMF_CAR_dkl_UCB',
                     #  'CMF_CAR_dkl_cfKG'
                     ]
-baseline_list = ['fabolas','smac']
+# baseline_list = ['fabolas','smac']
 
 cost_list = ['log', 'linear', 'pow_10']
 cost_label_dic = {'log': 'Log', 'linear': 'Linear', 'pow_10': 'Power 10'}
@@ -90,7 +79,7 @@ for kk in range(3):
         print(methods_name)
         cost_collection = []
         # SR_collection = []
-        inter_collection = []
+        inter_collection = []  
         for seed in seed_dic[cost_name]:
             path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results',Exp_marker,
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
@@ -115,12 +104,12 @@ for kk in range(3):
         mean = np.mean(SR_new, axis=0)
         var = np.std(SR_new, axis=0)
         if  cost_name == 'log':
-            if methods_name in ['CMF_CAR_UCB','CMF_CAR_cfKG','CMF_CAR_dkl_UCB', 'CMF_CAR_dkl_cfKG']:
-                makervery_index = 360
+            if methods_name in ['fabolas']:
+                makervery_index = 120
             else:
                 makervery_index = 360
         elif  cost_name == 'linear':
-            makervery_index = 60
+            makervery_index = 30
         else:
             makervery_index = 30
         ll = axs[kk].plot(cost_x, mean + add_dict[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
@@ -190,11 +179,11 @@ for kk in range(3):
 
 # 共享图例
 lines, labels = axs[0].get_legend_handles_labels()
-leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=6, markerscale = 1.3, fontsize=25)
+# leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=6, markerscale = 1.3, fontsize=25)
 
 # change the line width for the legend
-for line in leg.get_lines():
-    line.set_linewidth(2.5)
+# for line in leg.get_lines():
+#     line.set_linewidth(2.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' +'CMF_' + data_name + '_cost.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Graphs') + '/' +'CMF_' + data_name + '_cost.png', bbox_inches='tight')

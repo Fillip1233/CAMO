@@ -65,11 +65,11 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
         
         axs.plot(cost_x, mean + add_dic[data_name], ls=Dic[new_method_name][-1], color=Dic[new_method_name][0],
                     label=Dic[new_method_name][2],
-                    marker=Dic[new_method_name][1], markersize=12, markevery=60)
+                    marker=Dic[new_method_name][1], markersize=12, markevery=30)
         axs.fill_between(cost_x,
                         mean + add_dic[data_name] - 0.96 * var,
                         mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[new_method_name][0])
+                        alpha=0.07, color=Dic[new_method_name][0])
         # markevery_indices = range(0, len(cost_x), 180)
         # errorbar_x = [cost_x[i] for i in markevery_indices]
         # errorbar_y = [mean[i] + add_dic[data_name] for i in markevery_indices]
@@ -97,17 +97,19 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
     return label_name
 
 # UCB * EI s cfkg o
-Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
-        'smac':['#006400', "*", "SMAC3", 'solid'],
-        
-        'GP_UCB': ['#4169E1', "^", "BOCA", 'solid'],
-        'GP_cfKG': ['#4169E1', "X", "cfKG", 'solid'],
-        
-        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-BOCA", 'dashed'], # red
-        'CMF_CAR_cfKG': ['#FF0000', "X", "CAMO-cfKG", 'dashed'],
-        'CMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-BOCA", 'dashed'], # orange
-        'CMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", 'dashed'],
-        }
+Dic = {
+    'fabolas': ['#808000', "*", "Fabolas", 'solid'],  # 深红 + 五边形
+    'smac': ['#2E8B57', "H", "SMAC3", 'dashdot'],     # 深绿色 + 六边形
+    
+    'GP_UCB': ['#1E90FF', "s", "BOCA", 'solid'],       # 深蓝 + 方形
+    'GP_cfKG': ['#1E90FF', "o", "cfKG", 'solid'],      # 深蓝 + 圆形
+    
+    'CMF_CAR_UCB': ['#FF4500', "D", "CAMO-BOCA", 'dashed'],   # 橙红 + 菱形
+    'CMF_CAR_cfKG': ['#FF4500', "v", "CAMO-cfKG", 'dashed'],  # 橙红 + 下三角形
+    'CMF_CAR_dkl_UCB': ['#BA55D3', "p", "CAMO-DKL-BOCA", 'solid'],  # 淡紫色 + 五边形
+    'CMF_CAR_dkl_cfKG': ['#BA55D3', "^", "CAMO-DKL-cfKG", 'dashed'],  # 淡紫色 + 上三角形
+}
+
 
 data_list = ['Branin', 'Currin', 'Park', 'non_linear_sin', 'Forrester','bohachevsky']
 cost_name = 'pow_10'
@@ -175,4 +177,5 @@ for line in leg.get_lines():
 plt.tight_layout()
 # plt.savefig(os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Graph_show') + '/' + 'CMF_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
 # plt.savefig(os.path.join(sys.path[-1], 'Experiment', 'CMF', 'exp_521') + '/' + 'CMF_' + cost_name +'_SR_together.pdf', bbox_inches='tight')
-plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.pdf', bbox_inches='tight')
+# plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.pdf', bbox_inches='tight')
+plt.savefig(os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Graphs') + '/' + 'CMF_' + cost_name +'_SR_6.png', bbox_inches='tight')

@@ -82,7 +82,7 @@ class SyntheticFunction:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
-    parser.add_argument("--data_name", type=str, default="borehole")
+    parser.add_argument("--data_name", type=str, default="non_linear_sin")
     max_dic = {'forrester': 50, 'non_linear_sin':0.033,'Branin': 55,'Currin': 14,'Park': 2.2,
                'himmblau':303.5,'bohachevsky': 72.15,'colvile':609.26,'borehole':244}
     Data_list = {'non_linear_sin': non_linear_sin, 'forrester': forrester, 'Branin': Branin, 'Park':Park, "Currin":Currin,
@@ -97,11 +97,11 @@ if __name__ == "__main__":
         recording["cost"].append(0)
         t1 =time.time()
 
-        data_config = {"data_name": data_name, "data_model": Data_list[data_name], "cost_type": "linear", "total_fidelity_num": 2}
+        data_config = {"data_name": data_name, "data_model": Data_list[data_name], "cost_type": "pow_10", "total_fidelity_num": 2}
         model = SyntheticFunction(data_config, seed = seed)
 
         # Scenario object specifying the optimization "environment"
-        scenario = Scenario(model.configspace, deterministic=True, n_trials=100,seed = seed)
+        scenario = Scenario(model.configspace, deterministic=True, n_trials=180,seed = seed)
 
         # Now we use SMAC to find the best hyperparameters
         smac = HPOFacade(
@@ -146,7 +146,7 @@ if __name__ == "__main__":
             recording["time"].append(t4-t3)
 
         df = pd.DataFrame(recording)
-        directory = 'smac_result/' + data_name + '/'+ 'linear/'
+        directory = 'smac_result/' + data_name + '/'+'improve/'
         if not os.path.exists(directory):
             os.makedirs(directory)
         df.to_csv(directory + '/smac_seed_' + str(seed) + '.csv', index=False)
