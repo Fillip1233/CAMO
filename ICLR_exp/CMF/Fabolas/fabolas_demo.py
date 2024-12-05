@@ -328,7 +328,7 @@ if __name__ == '__main__':
     parser.add_argument("--data_name", type=str, default="Currin")
     parser.add_argument("--cost_type", type=str, default="pow_10")
     args = parser.parse_args()
-    Exp_marker = "Norm_res"
+    Exp_marker = "Norm_res_fabolas_log"
     data_name = args.data_name
     
     seed_dic ={'Currin':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
