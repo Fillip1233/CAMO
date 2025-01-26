@@ -48,8 +48,8 @@ Dic = {'AR_UCB': ['#000080', "^", "AR-MF-UCB", "solid"],
         }
 
 
-max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 55,'Currin': 14,'Park': 2.2}
-add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.85,'Currin': 0.01,'Park': 0.1, 'VibratePlate': 0, 'HeatedBlock': 1.2}
+max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 54.75,'Currin': 13.798,'Park': 2.2}
+add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.9,'Currin': 0.01,'Park': 0.1, 'VibratePlate': 0, 'HeatedBlock': 1.2}
 lim_x = {'forrester': [48, 135], 'non_linear_sin': [48, 150],
          'Branin':[90,150],'Currin':[90,150],'Park':[90,150]}
 lim_y = {'forrester': [0, 52], 'non_linear_sin': [0.007, 0.034],'Currin':[0,1.8],'Park':[0,1.2],'Branin':[0,9]}
@@ -69,7 +69,7 @@ our_method_list =   [
                      'CMF_CAR_dkl_cfKG',
                      ]
 baseline_list = ['DNN_MFBO']
-seed_dict = {'Branin':[0,1,2,3,5,6,7,8,9],'Currin':[0,3,4,5],"Park":[],'forrester':[0,4,5,9],'non_linear_sin':[0,1,3,7,8]}
+seed_dict = {'Branin':[0,1,2,3,5],'Currin':[0,1,3,4,5],"Park":[],'forrester':[0,4,5,9],'non_linear_sin':[0,1,3,7,8]}
 
 data_list = ['Branin', 'Currin']
 Exp_marker = "Norm_res"
@@ -118,8 +118,8 @@ for kk in range(2):
             data = pd.read_csv(path)
             cost = data['cost'].to_numpy()
             SR = data['SR'].to_numpy()
-            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
-            inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             cost_collection.append(cost)
             inter_collection.append(inter)
         cost_x = np.unique(np.concatenate(cost_collection))

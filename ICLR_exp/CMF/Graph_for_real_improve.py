@@ -29,7 +29,7 @@ Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
 
 add_dic = {'VibratePlate': 0, 'HeatedBlock': 0}
 max_dic = {'non_linear_sin':0.033, 'forrester': 48.09,'Branin': 55,'Currin': 14,'Park': 2.2, 'VibratePlate': 250, 'HeatedBlock': 2}
-lim_x = {'VibratePlate': [48, 175], 'HeatedBlock': [48, 175]}
+lim_x = {'VibratePlate': [48, 300], 'HeatedBlock': [48, 300]}
 lim_y = {'VibratePlate': [28, 41.8], 'HeatedBlock': [0,1.44]}
 seed_dic = {'VibratePlate': [0,1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 
             'HeatedBlock': [0,1,2,3,4,5,7,8,9,10,13,14,15,16,18,19,20,22,24,25,26,28,29]}

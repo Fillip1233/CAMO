@@ -325,17 +325,17 @@ if __name__ == '__main__':
                 #  'HeatedBlock': HeatedBlock,'VibratePlate': VibPlate
                  }
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
-    parser.add_argument("--data_name", type=str, default="Currin")
-    parser.add_argument("--cost_type", type=str, default="pow_10")
+    parser.add_argument("--data_name", type=str, default="bohachevsky")
+    parser.add_argument("--cost_type", type=str, default="log")
     args = parser.parse_args()
     Exp_marker = "Norm_res_fabolas_log"
     data_name = args.data_name
     
     seed_dic ={'Currin':[2,3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,27,28],'Branin':[0,2,3,4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
-           'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
-           'bohachevsky':[0,1,2,3,4,7,8,9,10,11,12,15,17,19,21,22,24,26,27],'himmelblau':[14,15,16,17,18,19,20,22,23,24,25,26,27,28],
+           'non_linear_sin':[2,3,4],'forrester':[1,2,4,5,7,8,9,11,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29],
+           'bohachevsky':[26,27],'himmelblau':[14,15,16,17,18,19,20,22,23,24,25,26,27,28],
            'borehole':[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],
-           'colvile':[14,15,19,20,21,22,24,25,29]}
+           'colvile':[11,17,28]}
     
     # Set up logging
     log_file_path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type, 'fabolas.log')
