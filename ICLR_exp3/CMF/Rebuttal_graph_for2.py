@@ -28,7 +28,7 @@ Dic = {
 }
 
 max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 55,'Currin': 14,'Park': 2.2,'colvile':609.26,
-           'himmelblau':303.5,'bohachevsky':72.15,'borehole':244}
+           'himmelblau':303.5,'borehole':244,'bohachevsky':72.15}
 add_dic = {'colvile': 125, 'himmelblau': 1,'borehole':4}
 lim_x = {'borehole':[48,300],'colvile': [48, 300], 'himmelblau': [48, 300]}
 lim_y = {'borehole':[0, 110],'colvile': [0, 425], 'himmelblau': [0, 150]}

@@ -29,12 +29,12 @@ Dic = {
     'CMF_CAR_dkl_cfKG': ['#BA55D3', "^", "CAMO-DKL-cfKG", 'dashed'],  # 淡紫色 + 上三角形
 }
 
-max_dic = {'forrester': 48.4495, 'non_linear_sin':0.03338,'Branin': 54.75,'Currin': 13.798,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15}
-add_dict = {'forrester': 0.8 , 'non_linear_sin': 0.1,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4,'VibratePlate': 0, 'HeatedBlock': 1.2,'borehole':0,'colvile':125}
+max_dic = {'forrester': 48.4495, 'non_linear_sin':0.03338,'Branin': 54.75,'Currin': 13.798,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15,'colvile':609.26}
+add_dict = {'forrester': 0.8 , 'non_linear_sin': 0,'Branin': 0.86,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4,'VibratePlate': 0, 'HeatedBlock': 1.2,'borehole':0,'colvile':125}
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300],
          'Branin':[48,300],'Currin':[48,300],'Park':[0,300],'VibratePlate':[48,150],'HeatedBlock':[48,150],
          'borehole':[48,300],'booth':[48,150],'hartmann':[48,150],"bohachevsky":[48,300],'himmelblau':[48,300],'colvile':[48,300]}
-lim_y = {'forrester': [0, 40], 'non_linear_sin': [0,0.04], 'Branin':[0,10], 'Currin':[0,3],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32]}
+lim_y = {'forrester': [0, 40], 'non_linear_sin': [0,0.04], 'Branin':[0,10], 'Currin':[0,3],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32],'colvile': [0, 425]}
 seed_dic ={'Currin':[6,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,28],'Branin':[4,5,7,8,10,11,13,14,15,16,17,18,19,20,21,22,24,25,27,29],'Park':[0,1,2,3,4,5,6,7,8,9,11,14,16,20,21,22,23,24,25,28,29],
            'non_linear_sin':[1,5,6,7,11,14,16,17,18,19,20,21,22,24,25,26,27,29],'forrester':[2,4,5,9,11,13,14,15,16,17,18,19,21,22,23,24,25,27,28,29],
            'bohachevsky':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'himmelblau':[0,1,2,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,26,27,28],
@@ -54,7 +54,7 @@ cmf_methods_name_list = [
                     'smac'
                          ]
 
-data_list = ['Branin', 'Currin', 'forrester']
+data_list = ['non_linear_sin', 'bohachevsky', 'Branin']
 cost_name = 'pow_10'
 fig, axs = plt.subplots(1, 3, figsize=(20, 6))
 Exp_marker = 'Norm_res'
