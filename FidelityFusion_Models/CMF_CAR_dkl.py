@@ -9,7 +9,7 @@ from FidelityFusion_Models.MF_data import MultiFidelityDataManager
 import matplotlib.pyplot as plt
 
 
-class fidelity_kernel_MC(nn.Module):
+class fidelity_kernel(nn.Module):
     """
     fidelity kernel module base ARD and use monte carlo to calculate the integral.
 
@@ -137,7 +137,7 @@ class CMF_CAR_dkl(nn.Module):
                                                     nn.LeakyReLU(),
                                                     nn.Linear(input_dim * 4, input_dim))
 
-        kernel_full = fidelity_kernel_MC(kernel_x, self.b)
+        kernel_full = fidelity_kernel(kernel_x, self.b)
         self.cigp = GPR(kernel=kernel_full, log_beta=1.0)
 
     def forward(self, data_manager, x_test,fidelity_indicator = None, normal = False):

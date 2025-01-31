@@ -7,11 +7,8 @@ from FidelityFusion_Models.GP_DMF import *
 from FidelityFusion_Models.GP_dkl import *
 from FidelityFusion_Models.CMF_CAR import *
 from FidelityFusion_Models.CMF_CAR_dkl import *
-from FidelityFusion_Models.CMF_CAR_dkl_s import *
-from FidelityFusion_Models.CMF_CAR_dkl_s_tr import *
 
-MF_model_list = {'CMF_CAR': ContinuousAutoRegression_large, 'CMF_CAR_dkl': CMF_CAR_dkl, "GP": cigp,"GP_dkl": cigp_dkl,
-                 "CMF_CAR_dkl_s": CMF_CAR_dkl_s,'CMF_CAR_dkl_s_tr': CMF_CAR_dkl_s_tr}
+MF_model_list = {'CMF_CAR': ContinuousAutoRegression_large, 'CMF_CAR_dkl': CMF_CAR_dkl, "GP": cigp,"GP_dkl": cigp_dkl,}
 
 class continuous_fidelity_knowledgement_gradient(nn.Module):
     def __init__(self, x_dimension, posterior_function, data_model, model_cost, data_manager, seed, search_range,norm,model_name):

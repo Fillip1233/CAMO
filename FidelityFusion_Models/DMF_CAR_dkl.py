@@ -16,7 +16,7 @@ def warp_function(lf, hf, fid_num):
     h = hf + 1
     return l, h
 
-class fidelity_kernel_MCMC(nn.Module):
+class fidelity_kernel(nn.Module):
     """
     fidelity kernel module base ARD and use MCMC to calculate the integral.
 
@@ -97,7 +97,7 @@ class DMF_CAR_dkl(nn.Module):
         for fidelity_low in range(self.fidelity_num - 1):
             low_fidelity_indicator, high_fidelity_indicator = warp_function(fidelity_low, fidelity_low+1, self.fidelity_num)
             # input_dim = kernel_list[0].length_scale.shape[0]
-            kernel_residual = fidelity_kernel_MCMC(kernel_list[fidelity_low+1],
+            kernel_residual = fidelity_kernel(kernel_list[fidelity_low+1],
                                                    low_fidelity_indicator, high_fidelity_indicator, self.b)
             self.cigp_list.append(GPR(kernel=kernel_residual, log_beta=1.0))
         

@@ -26,7 +26,7 @@ class upper_confidence_bound_continuous(nn.Module):
         self.k_0 = torch.tensor(1.0)
         self.p = torch.tensor(1.0)
 
-    def kernel(self, X1, X2):
+    def space_kernel(self, X1, X2):
     # the common RBF kernel
         X1 = X1 / self.log_length_scale.exp()
         X2 = X2 / self.log_length_scale.exp()
@@ -43,7 +43,7 @@ class upper_confidence_bound_continuous(nn.Module):
         else:
             input = torch.ones(1).reshape(-1, 1)*input
 
-        phi = self.kernel(input.double(), torch.ones(1).reshape(-1, 1).double())
+        phi = self.space_kernel(input.double(), torch.ones(1).reshape(-1, 1).double())
         phi = phi.detach()
         ksin = torch.sqrt(1- torch.pow(phi, 2))
         return ksin
