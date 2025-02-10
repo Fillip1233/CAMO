@@ -20,17 +20,23 @@ class cigp_dkl(nn.Module):
         super(cigp_dkl, self).__init__()
         self.kernel = kernel
         self.log_beta = nn.Parameter(torch.tensor([log_beta]))
+        self.FeatureExtractor = torch.nn.Sequential(nn.Linear(input_dim, input_dim *4),
+                                                    nn.LeakyReLU(),
+                                                    nn.Linear(input_dim *4, input_dim * 4),
+                                                    nn.LeakyReLU(),
+                                                    nn.Linear(input_dim * 4, input_dim * 4),
+                                                    nn.LeakyReLU(),
+                                                    nn.Linear(input_dim * 4, input_dim)).double()
         # self.FeatureExtractor = torch.nn.Sequential(nn.Linear(input_dim, input_dim *4),
         #                                             nn.LeakyReLU(),
         #                                             nn.Linear(input_dim *4, input_dim * 4),
         #                                             nn.LeakyReLU(),
         #                                             nn.Linear(input_dim * 4, input_dim * 4),
         #                                             nn.LeakyReLU(),
-        #                                             nn.Linear(input_dim * 4, input_dim)).double()
-        self.FeatureExtractor = torch.nn.Sequential(nn.Linear(input_dim, input_dim *4),
-                                                    nn.LeakyReLU(),
-                                                    nn.Linear(input_dim *4, input_dim),
-                                                    ).double()
+        #                                             nn.Linear(input_dim * 4, input_dim * 4),
+        #                                             nn.LeakyReLU(),
+        #                                             nn.Linear(input_dim * 4, input_dim),
+        #                                             ).double()
 
 
     def forward(self, data_manager, x_test, fidelity_indicator = None, normal = False):
