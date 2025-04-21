@@ -232,10 +232,10 @@ if __name__ == '__main__':
     data_name = args.data_name
     start = args.start_seed
     
-    Exp_marker = 'DKL5_explore'
+    Exp_marker = 'Norm_res'
     
     # Set up logging
-    log_file_path = os.path.join(sys.path[-1], 'ICLR_exp', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type , 'experiment.log')
+    log_file_path = os.path.join(sys.path[-1], 'ICLR_exp3', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type , 'experiment.log')
     log_dir = os.path.dirname(log_file_path)
 
     if not os.path.exists(log_dir):
