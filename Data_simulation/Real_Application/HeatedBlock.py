@@ -23,7 +23,7 @@ class HeatedBlock:
         self.search_range = [[0.1, 0.4], [0.1, 0.4], [0, 2*np.pi],[0, 1]]
         self.cost = cost_list[cost_type](self.search_range[-1])
         self.eng = matlab.engine.start_matlab()
-        self.eng.addpath(r'F:\Github_project\mfbo_v2\Data_simulation\Real_Application', nargout=0)
+        self.eng.addpath(r'/home/fillip/桌面/CAMO/Data_simulation/Real_Application', nargout=0)
         # self.lb = torch.tensor([bound[0] for bound in self.bounds])
         # self.ub = torch.tensor([bound[1] for bound in self.bounds])
     

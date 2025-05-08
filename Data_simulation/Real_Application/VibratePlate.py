@@ -22,7 +22,7 @@ class VibPlate:
         self.search_range = [[100e9, 500e9], [0.2, 0.6], [6000, 10000],[0, 1]]
         self.cost = cost_list[cost_type](self.search_range[-1])
         self.eng = matlab.engine.start_matlab()
-        self.eng.addpath(r'F:\Github_project\mfbo_v2\Data_simulation\Real_Application', nargout=0)
+        self.eng.addpath(r'/home/fillip/桌面/CAMO/Data_simulation/Real_Application', nargout=0)
     
     def get_data(self, input_x, input_s):
         if isinstance(input_x, torch.Tensor):
