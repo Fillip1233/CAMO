@@ -222,7 +222,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
     parser.add_argument("--data_name", type=str, default="non_linear_sin")
     parser.add_argument("--cost_type", type=str, default="pow_10")
-    parser.add_argument("--start_seed", type=int, default=0)
+    parser.add_argument("--start_seed", type=int, default=19)
     args = parser.parse_args()
     data_name = args.data_name
     start = args.start_seed

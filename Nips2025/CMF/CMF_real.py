@@ -172,7 +172,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="An example program with command-line arguments")
     parser.add_argument("--data_name", type=str, default="HeatedBlock")
     parser.add_argument("--cost_type", type=str, default="pow_10")
+    parser.add_argument("--start_seed", type=int, default=0)
     args = parser.parse_args()
+    start = args.start_seed
     data_name = args.data_name
     
     Exp_marker = 'Norm_res'
@@ -187,7 +189,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename=log_file_path, filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # logging.basicConfig(filename=log_file_path, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    for seed in range(30):
+    for seed in range(start,30):
         for mf_model in ["CMF_CAR","GP"]:
             for acq in ["UCB","cfKG"]:
                 exp_config = {

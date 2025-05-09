@@ -170,6 +170,7 @@ def MF_BO_discrete(exp_config):
             
             T2 = time.time()
 
+            ## ?是不是错了 不用/fi
             cost_iter = model_cost.compute_model_ConDisGP_cost([fidelity_manager.get_data(0)[0]],total_fidelity_num)
             if cost_iter >= 150:
                 flag = False
