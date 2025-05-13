@@ -49,7 +49,8 @@ class cost_discrete():
         if isinstance(z, np.ndarray):
             c = np.floor(np.power(10, z))
         else:
-            c = torch.floor(torch.pow(10, torch.tensor(z)))
+            # c = torch.floor(torch.pow(10, torch.tensor(z)))
+            c = torch.round(torch.pow(10, torch.tensor(z)))
             # c = int(pow(10, z))
         return c
     
@@ -93,7 +94,8 @@ class cost_discrete():
     def compute_model_cost_smac(self, ytr):
         C = 0
         for i in range(len(ytr)):
-            C += self.compute_cost(i) * ytr[i].shape[0]
+            # C += self.compute_cost(i) * ytr[i].shape[0]
+            C += self.compute_cost(ytr[i][-1])
         return C
 
 if __name__ == "__main__":

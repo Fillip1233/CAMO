@@ -107,12 +107,12 @@ if __name__ == "__main__":
             x = [config["x" + str(i + 1)] for i in range(len(model.x_range))]
             s = [config["s"]]
             data.append(x + s)
-            cost = model.model_cost.compute_gp_cost(torch.tensor(data)).item()
+            cost = model.model_cost.compute_model_cost_smac(torch.tensor(data)).item()
             y = v.cost  # type: ignore # 因为y是相反数-y
             data_y.append(model.plot(torch.tensor(x), torch.tensor(model.fidelity_range[-1])).item())
             t4 = time.time()
             recording["SR"].append(max_theoretical - max(data_y))
-            recording["cost"].append(cost.item())
+            recording["cost"].append(cost)
             # recording["data"].append(x+s)
             # recording["y"].append(data_y[-1])
             recording["operation_time"].append(v.time)

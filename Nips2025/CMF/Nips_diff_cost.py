@@ -49,8 +49,8 @@ seed_dic ={'pow_10':[3,4,6,8,9,11,12,13,16,17,18,19,20,21,22,23,24,25,26,28],'li
 # seed_dic ={'pow_10':[0,2,4,5,7],'linear':[0,4,7,9],'log':[0,1,2,3,4,7]}
 
 #bohachevsky
-# data_name = 'bohachevsky'
-# seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
+data_name = 'bohachevsky'
+seed_dic ={'pow_10':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24,26,27],'linear':[0,1,2,3,4,7,8,10,11,12,15,17,19,21,22,24],'log':[0,1,2,3,4,7,9,10,11,12,15,17,19,21,22,24]}
 
 ##
 # data_name = 'borehole'
@@ -181,7 +181,7 @@ for kk in range(3):
 
 # 共享图例
 lines, labels = axs[0].get_legend_handles_labels()
-leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=5, markerscale = 1.3, fontsize=25)
+# leg = fig.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), fancybox=True, mode='normal', ncol=5, markerscale = 1.3, fontsize=25)
 
 # change the line width for the legend
 # for line in leg.get_lines():

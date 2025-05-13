@@ -27,7 +27,7 @@ Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
         }
 
 
-add_dic = {'VibratePlate': 0, 'HeatedBlock': 0}
+add_dic = {'VibratePlate': 0, 'HeatedBlock': 1}
 max_dic = {'non_linear_sin':0.033, 'forrester': 48.09,'Branin': 55,'Currin': 14,'Park': 2.2, 'VibratePlate': 250, 'HeatedBlock': 2}
 lim_x = {'VibratePlate': [48, 300], 'HeatedBlock': [48, 300]}
 lim_y = {'VibratePlate': [28, 41.8], 'HeatedBlock': [0,1.44]}
@@ -41,15 +41,16 @@ cmf_methods_name_list = ['GP_UCB',
                          'CMF_CAR_cfKG',
                         #  'CMF_CAR_dkl_UCB', 
                         #  'CMF_CAR_dkl_cfKG',
-                        #  'fabolas'
+                        #  'fabolas',
+                        'smac'
                          ]
 
 data_list = [
-    'VibratePlate', 
-    # 'HeatedBlock'
+    # 'VibratePlate', 
+    'HeatedBlock'
     ]
 cost_name = 'pow_10'
-fig, axs = plt.subplots(2, 1, figsize=(20, 6))
+fig, axs = plt.subplots(2, 1, figsize=(10, 6))
 Exp_marker = 'Norm_res'
 
 for kk in range(1):
@@ -63,7 +64,7 @@ for kk in range(1):
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
             cost = data['cost'].to_numpy()
-            if methods_name in ['fabolas', 'smac']:
+            if methods_name in ['fabolas']:
                 SR = max_dic[data_name] - data['incumbents'].to_numpy()
             else:
                 SR = data['SR'].to_numpy()
@@ -88,7 +89,7 @@ for kk in range(1):
     axs[0].set_xlabel("Cost", fontsize=25)
     axs[0].set_ylabel("Simple regret", fontsize=25)
     axs[0].set_xlim(lim_x[data_name][0], lim_x[data_name][1])
-    # axs[kk].set_ylim(lim_y[data_name][0], lim_y[data_name][1])
+    axs[kk].set_ylim(lim_y[data_name][0], lim_y[data_name][1])
     axs[0].tick_params(axis='both', labelsize=20)
     axs[0].grid()
 
