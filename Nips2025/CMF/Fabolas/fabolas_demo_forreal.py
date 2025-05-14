@@ -8,7 +8,7 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import george
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','..')))
 
 from Data_simulation.Synthetic_MF_Function import *
 # from Data_simulation.Real_Application.HeatedBlock import HeatedBlock
@@ -28,7 +28,7 @@ from Data_simulation.Real_Application.VibratePlate import VibPlate
 
 def fabolas(exp_config):
     data_name = exp_config["data_name"]
-    path_csv = sys.path[-1] + '/Rebuttal_Experiment/CMF/Exp_results/'+exp_config['Exp_marker']+'/' + data_name + '/' + exp_config['cost_type'] + '/'
+    path_csv ='/home/fillip/桌面/CAMO/Nips2025/CMF/Exp_results'+exp_config['Exp_marker']+'/' + data_name + '/' + exp_config['cost_type'] + '/'
     seed = exp_config["seed"]
     data_model = exp_config["data_model"]
     initial_index = exp_config['initial_num']
@@ -263,7 +263,7 @@ def fabolas(exp_config):
         s_tem_aft = 1 + (ss_tem - np.min(ss_tem)) * (2 - 1) / (np.max(ss_tem) - np.min(ss_tem))
         cost = model_cost_exp.compute_model_cost_fabolas(X[:, 0], s_tem_aft).item()
         
-        if cost > 150:
+        if cost > 300:
             flag = 0
         recording["cost"].append(cost)
         # recording["incumbents"].append(incumbents[count].tolist()[0])
@@ -327,7 +327,7 @@ if __name__ == '__main__':
     data_name = args.data_name
     
     # Set up logging
-    log_file_path = os.path.join(sys.path[-1], 'Rebuttal_Experiment', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type ,'fabolas_improve', 'fabolas.log')
+    log_file_path = os.path.join('/home/fillip/桌面/CAMO/Nips2025/CMF/Exp_results', 'Exp_results', Exp_marker, data_name, args.cost_type ,'fabolas_improve', 'fabolas.log')
     log_dir = os.path.dirname(log_file_path)
 
     if not os.path.exists(log_dir):
@@ -335,7 +335,7 @@ if __name__ == '__main__':
     
     logging.basicConfig(filename=log_file_path, filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    for seed in [0,1,2,3,4,5,6,7,8,9]:
+    for seed in range(0,30):
         exp_configuration = {'seed': seed, 'data_name': data_name, 'data_model': Data_list[data_name], 'initial_num': [10,4], 'cost_type': args.cost_type,
                              'BO_iterations': 10, 'MF_iterations': 100, 'MF_learning_rate': 0.0001, 'Exp_marker': Exp_marker}
 

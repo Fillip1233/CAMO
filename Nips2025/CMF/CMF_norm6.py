@@ -227,7 +227,7 @@ if __name__ == '__main__':
     data_name = args.data_name
     start = args.start_seed
     
-    Exp_marker = 'Norm_res'
+    Exp_marker = 'Norm_res1'
     
     # Set up logging
     log_file_path = os.path.join(sys.path[-1], 'Nips2025', 'CMF', 'Exp_results', Exp_marker, data_name, args.cost_type , 'experiment.log')
@@ -238,9 +238,9 @@ if __name__ == '__main__':
     
     logging.basicConfig(filename=log_file_path, filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    for seed in range(start,30):
+    for seed in range(start,10):
         for mf_model in ["CMF_CAR","GP"]:
-            for acq in ["cfKG"]:
+            for acq in ["UCB","cfKG"]:
                 exp_config = {
                             'seed': seed,
                             'data_model': Data_list[args.data_name],

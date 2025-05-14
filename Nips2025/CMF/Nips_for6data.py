@@ -65,11 +65,11 @@ def draw_plots(axs, data_name, cmf_methods_name_list, exp_marker):
         
         axs.plot(cost_x, mean + add_dic[data_name], ls=Dic[new_method_name][-1], color=Dic[new_method_name][0],
                     label=Dic[new_method_name][2],
-                    marker=Dic[new_method_name][1], markersize=12, markevery=30)
-        axs.fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.07, color=Dic[new_method_name][0])
+                    marker=Dic[new_method_name][1], markersize=12, markevery=30,linewidth=2)
+        # axs.fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.07, color=Dic[new_method_name][0])
         # markevery_indices = range(0, len(cost_x), 180)
         # errorbar_x = [cost_x[i] for i in markevery_indices]
         # errorbar_y = [mean[i] + add_dic[data_name] for i in markevery_indices]
@@ -117,7 +117,7 @@ cost_name = 'pow_10'
 max_dic = {'forrester': 48.4495, 'non_linear_sin':0.03338,'Branin': 54.75,'Currin': 13.798,'Park': 2.174,'himmelblau':303.5,'bohachevsky': 72.15}
 add_dic = {'forrester': 0.8 , 'non_linear_sin': 0,'Branin': 0.9,'Currin': 0.01,'Park': 0.1, 'himmelblau': 1,'bohachevsky': 4}
 lim_x = {'forrester': [48, 300], 'non_linear_sin': [48, 300], 'Branin':[48,300],'Currin':[48,300],'Park':[48,300], 'himmelblau':[48, 300],'bohachevsky':[48,300]}
-lim_y = {'forrester': [0, 40], 'non_linear_sin': [0,0.04], 'Branin':[0,10], 'Currin':[0,3],'Park':[0,1.2],'himmelblau':[0, 150],'bohachevsky':[0,32]}
+lim_y = {'forrester': [0, 25], 'non_linear_sin': [0,0.04], 'Branin':[0,8], 'Currin':[0,2],'Park':[0,1],'himmelblau':[0, 150],'bohachevsky':[0,22]}
 # seed_dic = {'forrester': [0,1,2,3,5,9], 'non_linear_sin': [1,4,5,6,9], 'Branin':[2,4,5,7,8], 'Currin':[2,3,4,5,6,7,8],'Park':[0,2,4,5,7],'himmelblau':[0,1,2,3,8],
 #             'bohachevsky':[1,17,19,21,22]}
 seed_dic ={

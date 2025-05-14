@@ -33,7 +33,7 @@ Dic = { 'fabolas':['#808000', "*", "Fabolas", 'solid'],
         'DMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-UCB", "dashed"], # orange
         'DMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", "dashed"],
         
-        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-UCB", "dashed"], # red
+        'CMF_CAR_UCB': ['#FF0000', "^", "CAMO-BOCA", "dashed"], # red
         'CMF_CAR_cfKG': ['#FF0000', "X", "CAMO-cfKG", "dashed"],
         'CMF_CAR_dkl_UCB': ['#FF5E00', "^", "CAMO-DKL-UCB", "dashed"], # orange
         'CMF_CAR_dkl_cfKG': ['#FF5E00', "X", "CAMO-DKL-cfKG", "dashed"],
@@ -87,11 +87,11 @@ def paint_dmf_query(axs):
 
     axs.bar(acq_name_list, values_mean, yerr=values_std, capsize=15, color=colors, width = 0.6)
     for i in range(len(acq_name_list)):
-        axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
-    axs.set_xticklabels(acq_name_list, rotation=45, ha='right', fontsize=30)
+        axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=30)
+    axs.set_xticklabels(acq_name_list, rotation=45, ha='right', fontsize=40)
     axs.set_yscale('log')
-    axs.tick_params(axis='both', labelsize=25)
-    axs.set_ylabel('Query time (seconds)', fontsize=30)
+    axs.tick_params(axis='both', labelsize=35)
+    axs.set_ylabel('Query time (seconds)', fontsize=35)
 
 # CMF
 def paint_cmf_query(axs):
@@ -129,14 +129,14 @@ def paint_cmf_query(axs):
     axs.bar(methods_name_list, values_mean, yerr=values_std, capsize=15, color=colors,width = 0.6)
     for i in range(len(methods_name_list)):
         if methods_name_list[i] == 'smac':
-            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=25)
+            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=30)
         else:
-            axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
-    axs.set_xticklabels([Dic[i][2] for i in methods_name_list], rotation=45, ha='right', fontsize=30)
+            axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=30)
+    axs.set_xticklabels([Dic[i][2] for i in methods_name_list], rotation=45, ha='right', fontsize=40)
     axs.set_yscale('log')
     # axs[1].set_yticklabels([1.0])
-    axs.tick_params(axis='both', labelsize=25)
-    axs.set_ylabel('Query time (seconds)', fontsize=30)
+    axs.tick_params(axis='both', labelsize=35)
+    axs.set_ylabel('Query time (seconds)', fontsize=35)
 
 
 def paint_dmf_training(axs):
@@ -167,12 +167,12 @@ def paint_dmf_training(axs):
 
     axs.bar(labels, values_mean, yerr=values_std, capsize=15, color=colors, width = 0.6)
     for i in range(len(labels)):
-        axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
+        axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=30)
 
-    axs.set_xticklabels(labels, rotation=45, ha='right', fontsize=30)
+    axs.set_xticklabels(labels, rotation=45, ha='right', fontsize=40)
     axs.set_yscale('log')
-    axs.tick_params(axis='both', labelsize=25)
-    axs.set_ylabel('Training time (seconds)', fontsize=30)
+    axs.tick_params(axis='both', labelsize=35)
+    axs.set_ylabel('Training time (seconds)', fontsize=35)
 
 def paint_cmf_training(axs):
 
@@ -202,19 +202,19 @@ def paint_cmf_training(axs):
     axs.bar(labels, values_mean, yerr=values_std, capsize=15, color=colors, width = 0.6)
     for i in range(len(labels)):
         if labels[i] == 'SMAC3':
-            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=25)
+            axs.text(i, values_mean[i], f"{8e-5}",ha='center', va='bottom', fontsize=30)
         else:
-            axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=25)
-    axs.set_xticklabels(labels, rotation=45, ha='right', fontsize=30)
+            axs.text(i, values_mean[i],f"{values_mean[i]:.2f}",ha='center', va='bottom', fontsize=30)
+    axs.set_xticklabels(labels, rotation=45, ha='right', fontsize=40)
     axs.set_yscale('log')
-    axs.tick_params(axis='both', labelsize=25)
-    axs.set_ylabel('Training time (seconds)', fontsize=30)
+    axs.tick_params(axis='both', labelsize=35)
+    axs.set_ylabel('Training time (seconds)', fontsize=35)
 
 
 seed_dic = {'forrester': [0,1,2,3], 'non_linear_sin': [0,1,2,3,4], 'Branin2':[1,2], 'Currin':[3,5],'Park':[0,1,4]}
 cost_name = 'pow_10'
 
-fig, axs = plt.subplots(1, 4, figsize=(35, 8))
+fig, axs = plt.subplots(1, 4, figsize=(35, 10))
 paint_dmf_query(axs[0])
 paint_cmf_query(axs[1])
 

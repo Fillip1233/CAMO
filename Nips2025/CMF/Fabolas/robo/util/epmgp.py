@@ -113,7 +113,8 @@ def min_faktor(Mu, Sigma, k, gamma=1):
             b = True
             break
     if np.isnan(d):
-        logZ = -np.Infinity
+        # logZ = -np.Infinity
+        logZ = -np.inf
         yield logZ
         dlogZdMu = np.zeros((D, 1))
         yield dlogZdMu
@@ -210,12 +211,14 @@ def lt_factor(s, l, M, V, mp, p, gamma):
              + (alpha * alpha) / (2 * beta) * cVnic
 
     elif exit_flag == -1:
-        d = np.NAN
+        # d = np.NAN
+        d = np.nan
         Mnew = 0
         Vnew = 0
         pnew = 0
         mpnew = 0
-        logS = -np.Infinity
+        # logS = -np.Infinity
+        logS = -np.inf
     elif exit_flag == 1:
         d = 0
         # remove message from marginal:

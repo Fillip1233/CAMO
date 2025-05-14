@@ -31,7 +31,7 @@ max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 55,'Currin': 14,'Park':
            'himmelblau':303.5,'borehole':244,'bohachevsky':72.15}
 add_dic = {'colvile': 125, 'himmelblau': 1,'borehole':4}
 lim_x = {'borehole':[48,300],'colvile': [48, 300], 'himmelblau': [48, 300]}
-lim_y = {'borehole':[0, 110],'colvile': [0, 425], 'himmelblau': [0, 150]}
+lim_y = {'borehole':[0, 100],'colvile': [0, 400], 'himmelblau': [0, 120]}
 seed_dic = {'himmelblau':[0,3,4,6,7,8,9,11,13,14,15,16,17,18,19,20,22,23,24,25,28],
            'borehole':[3,4,6,7,8,9,10,11,13,14,15,17,20,22,23,24,25,26,28,29],
             # 'borehole':[3,4,6,8,9,10,17,20,22,23,24,25,26,28,29],
@@ -84,11 +84,11 @@ for kk in range(3):
     
         ll = axs[kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=25)
-        axs[kk].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12,markevery=25,linewidth=2)
+        # axs[kk].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
         
     axs[kk].set_xlabel("Cost", fontsize=25)
     axs[kk].set_ylabel("Simple regret", fontsize=25)

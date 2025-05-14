@@ -52,7 +52,7 @@ max_dic = {'non_linear_sin':0, 'forrester': 50,'Branin': 54.75,'Currin': 13.798,
 add_dict = {'forrester': 0 ,'non_linear_sin': 0,'Branin': 0.9,'Currin': 0.01,'Park': 0.1, 'VibratePlate': 0, 'HeatedBlock': 1.2}
 lim_x = {'forrester': [48, 135], 'non_linear_sin': [48, 150],
          'Branin':[90,150],'Currin':[90,150],'Park':[90,150]}
-lim_y = {'forrester': [0, 52], 'non_linear_sin': [0.007, 0.034],'Currin':[0,1.8],'Park':[0,1.2],'Branin':[0,9]}
+lim_y = {'forrester': [0, 52], 'non_linear_sin': [0.007, 0.034],'Currin':[0,1.25],'Park':[0,1.2],'Branin':[0,6]}
 
 methods_name_list = [
                     'AR_UCB', 'ResGP_UCB','GP_UCB',
@@ -103,11 +103,11 @@ for kk in range(2):
 
         ll = axs[kk].plot(cost_x, mean + add_dict[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12, markevery=14)
-        axs[kk].fill_between(cost_x,
-                        mean + add_dict[data_name] - 0.96 * var,
-                        mean + add_dict[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12, markevery=14,linewidth=2)
+        # axs[kk].fill_between(cost_x,
+        #                 mean + add_dict[data_name] - 0.96 * var,
+        #                 mean + add_dict[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
     for methods_name in our_method_list:
         print(methods_name)
         cost_collection = []
@@ -130,11 +130,11 @@ for kk in range(2):
 
         ll = axs[kk].plot(cost_x, mean + add_dict[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12, markevery=14)
-        axs[kk].fill_between(cost_x,
-                        mean + add_dict[data_name] - 0.96 * var,
-                        mean + add_dict[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12, markevery=14,linewidth=2)
+        # axs[kk].fill_between(cost_x,
+        #                 mean + add_dict[data_name] - 0.96 * var,
+        #                 mean + add_dict[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
             
     for methods_name in baseline_list:
         print(methods_name)
@@ -157,11 +157,11 @@ for kk in range(2):
 
         ll = axs[kk].plot(cost_x, mean + add_dict[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12, markevery=14)
-        axs[kk].fill_between(cost_x,
-                        mean + add_dict[data_name] - 0.96 * var,
-                        mean + add_dict[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12, markevery=14,linewidth=2)
+        # axs[kk].fill_between(cost_x,
+        #                 mean + add_dict[data_name] - 0.96 * var,
+        #                 mean + add_dict[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
             
 
     # axs[kk].set_yscale('log')

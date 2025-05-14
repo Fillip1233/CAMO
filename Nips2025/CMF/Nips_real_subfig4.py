@@ -27,13 +27,13 @@ Dic = {
 }
 
 
-add_dic = {'VibratePlate': 0, 'HeatedBlock': 0}
+add_dic = {'VibratePlate': 0, 'HeatedBlock': 1}
 max_dic = {'VibratePlate': 250, 'HeatedBlock': 2}
 lim_x = {'VibratePlate': [48, 300], 'HeatedBlock': [48, 300]}
-lim_y = {'VibratePlate': [28, 41.8], 'HeatedBlock': [0.3,1]}
+lim_y = {'VibratePlate': [28, 41.8], 'HeatedBlock': [0,1.44]}
 
 seed_dic = {'VibratePlate': [0,1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 
-            'HeatedBlock': [0,1,2,3,4,5,7,8,9,10,13,14,15,16,18,19,20,22,24,25,26,28,29]}
+            'HeatedBlock': [0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29]}
 
 cmf_methods_name_list = [
                         'GP_UCB', 'GP_cfKG', 
@@ -55,8 +55,12 @@ for kk in range(2):
         inter_collection = []
 
         for seed in seed_dic[data_name]:
-            path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+            if data_name == 'HeatedBlock':
+                path = os.path.join(sys.path[-1], 'Nips2025', 'CMF', 'Exp_results','Norm_res',
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
+            else:
+                path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+                                    data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
             cost = data['cost'].to_numpy()
             SR = data['SR'].to_numpy()
@@ -74,11 +78,11 @@ for kk in range(2):
 
         ll = axs[0, kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=60)
-        axs[0, kk].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12,markevery=60,linewidth=2)
+        # axs[0, kk].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
         axs[0,kk].text(0.5, 1.02, data_name, transform=axs[0,kk].transAxes, ha='center', fontsize=25)
         
     for methods_name in baseline_list:
@@ -87,14 +91,19 @@ for kk in range(2):
     
         for seed in seed_dic[data_name]:
             
-            path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+            if data_name == 'HeatedBlock':
+                path = os.path.join(sys.path[-1], 'Nips2025', 'CMF', 'Exp_results','Norm_res',
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
+            else:
+                path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+                                    data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
             cost = data['cost'].to_numpy()
             if methods_name == 'fabolas':
                 SR = max_dic[data_name] - data['incumbents'].to_numpy()
             else:
-                SR = data['SR'].to_numpy() + 1.27
+                # SR = data['SR'].to_numpy() + 1.27
+                SR = data['SR'].to_numpy()
             inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
             # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             
@@ -111,11 +120,11 @@ for kk in range(2):
 
         ll = axs[0, kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=17)
-        axs[0, kk].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12,markevery=60,linewidth=2)
+        # axs[0, kk].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
         axs[0,kk].text(0.5, 1.02, data_name, transform=axs[0,kk].transAxes, ha='center', fontsize=25)
         
     axs[0, kk].set_xlabel("Cost", fontsize=25)
@@ -136,16 +145,32 @@ for kk in range(2):
         inter_collection = []
 
         for seed in seed_dic[data_name]:
-            path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+            if data_name == 'HeatedBlock':
+                path = os.path.join(sys.path[-1], 'Nips2025', 'CMF', 'Exp_results','Norm_res',
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
+            else:
+                path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+                                    data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
             cost_tem = data['operation_time'].to_numpy()
             cost = np.cumsum(cost_tem)
-            SR = data['SR'].to_numpy()
-            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
-            inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            if methods_name in ['fabolas']:
+                SR = max_dic[data_name] - data['incumbents'].to_numpy()
+                inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            else:
+                SR = data['SR'].to_numpy()
+                inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             cost_collection.append(cost)
             inter_collection.append(inter)
+            # data = pd.DataFrame(pd.read_csv(path))
+            # cost_tem = data['operation_time'].to_numpy()
+            # cost = np.cumsum(cost_tem)
+            # SR = data['SR'].to_numpy()
+            # # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            # cost_collection.append(cost)
+            # inter_collection.append(inter)
 
         cost_x = np.unique(np.concatenate(cost_collection))
         SR_new = [inter_collection[i](cost_x) for i in range(len(inter_collection))]
@@ -156,46 +181,66 @@ for kk in range(2):
 
         ll = axs[1, kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=60)
-        axs[1, kk].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12,markevery=300)
+        # axs[1, kk].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
     
     for methods_name in baseline_list:
         cost_collection = []
         inter_collection = []
 
         for seed in seed_dic[data_name]:
-            path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+            if data_name == 'HeatedBlock':
+                path = os.path.join(sys.path[-1], 'Nips2025', 'CMF', 'Exp_results','Norm_res',
                                 data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
+            else:
+                path = os.path.join(sys.path[-1], 'ICLR_exp2', 'CMF', 'Exp_results','Norm_res',
+                                    data_name, cost_name, methods_name + '_seed_' + str(seed) + '.csv')
             data = pd.DataFrame(pd.read_csv(path))
-            if methods_name == 'fabolas':
-                cost_tem = data['operation_time'].to_numpy()
-            elif methods_name == 'smac' and data_name == 'VibratePlate':
-                cost_tem = data['time'].to_numpy()
-            else:
-                cost_tem = data['time'].to_numpy()
-            
-            if methods_name == 'fabolas':
-                cost = cost_tem
-            else:
-                cost = np.cumsum(cost_tem)
-            if methods_name == 'smac' and data_name == 'VibratePlate':
-                cost = cost+106
-            elif methods_name == 'smac' and data_name == 'HeatedBlock':
-                cost = cost+50
-            
-            if methods_name == 'fabolas':
+            cost_tem = data['operation_time'].to_numpy()
+            cost = np.cumsum(cost_tem)
+            if methods_name in ['fabolas']:
                 SR = max_dic[data_name] - data['incumbents'].to_numpy()
-            elif methods_name == 'smac' and data_name == 'HeatedBlock':
-                SR = data['SR'].to_numpy()+ 1.27
+                inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             else:
                 SR = data['SR'].to_numpy()
-            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
-            inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+                if methods_name == 'smac' and data_name == 'VibratePlate':
+                    cost = cost+106
+                inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             cost_collection.append(cost)
             inter_collection.append(inter)
+            # data = pd.DataFrame(pd.read_csv(path))
+            # if methods_name == 'fabolas':
+            #     cost_tem = data['operation_time'].to_numpy()
+            # elif methods_name == 'smac' and data_name == 'VibratePlate':
+            #     cost_tem = data['time'].to_numpy()
+            # else:
+            #     cost_tem = data['time'].to_numpy()
+            
+            # if methods_name == 'fabolas':
+            #     cost = cost_tem
+            # else:
+            #     cost = np.cumsum(cost_tem)
+            # if methods_name == 'smac' and data_name == 'VibratePlate':
+            #     cost = cost+106
+            # elif methods_name == 'smac' and data_name == 'HeatedBlock':
+            #     cost = cost
+            
+            # if methods_name == 'fabolas':
+            #     SR = max_dic[data_name] - data['incumbents'].to_numpy()
+            # elif methods_name == 'smac' and data_name == 'HeatedBlock':
+            #     # SR = data['SR'].to_numpy()+ 1.27
+            #     SR = data['SR'].to_numpy()
+            # else:
+            #     SR = data['SR'].to_numpy()
+            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            # cost_collection.append(cost)
+            # inter_collection.append(inter)
 
         cost_x = np.unique(np.concatenate(cost_collection))
         SR_new = [inter_collection[i](cost_x) for i in range(len(inter_collection))]
@@ -205,11 +250,11 @@ for kk in range(2):
 
         ll = axs[1, kk].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
-                    marker=Dic[methods_name][1], markersize=12,markevery=7)
-        axs[1, kk].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+                    marker=Dic[methods_name][1], markersize=12,markevery=100)
+        # axs[1, kk].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
         
     axs[1, kk].set_xlabel("Wall clock time (s)", fontsize=25)
     axs[1, kk].set_ylabel("Simple regret", fontsize=25)

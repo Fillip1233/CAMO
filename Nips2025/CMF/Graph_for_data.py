@@ -32,7 +32,7 @@ max_dic = {'non_linear_sin':0.033, 'forrester': 48.09,'Branin': 55,'Currin': 14,
 lim_x = {'VibratePlate': [48, 300], 'HeatedBlock': [48, 300]}
 lim_y = {'VibratePlate': [28, 41.8], 'HeatedBlock': [0,1.44]}
 seed_dic = {'VibratePlate': [0,1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 
-            'HeatedBlock': [0,1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29]}
+            'HeatedBlock': [0,1,2,3,4,5,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29]}
             # 'HeatedBlock': [2,7,8,9,10,13,14,18,22,24,28,29]}
 
 cmf_methods_name_list = ['GP_UCB', 
@@ -41,7 +41,7 @@ cmf_methods_name_list = ['GP_UCB',
                          'CMF_CAR_cfKG',
                         #  'CMF_CAR_dkl_UCB', 
                         #  'CMF_CAR_dkl_cfKG',
-                        #  'fabolas',
+                        'fabolas',
                         'smac'
                          ]
 
@@ -81,10 +81,10 @@ for kk in range(1):
         ll = axs[0].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
                     marker=Dic[methods_name][1], markersize=12,markevery=17)
-        axs[0].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+        # axs[0].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
         
     axs[0].set_xlabel("Cost", fontsize=25)
     axs[0].set_ylabel("Simple regret", fontsize=25)
@@ -105,9 +105,13 @@ for kk in range(1):
             data = pd.DataFrame(pd.read_csv(path))
             cost_tem = data['operation_time'].to_numpy()
             cost = np.cumsum(cost_tem)
-            SR = data['SR'].to_numpy()
-            # inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
-            inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            if methods_name in ['fabolas']:
+                SR = max_dic[data_name] - data['incumbents'].to_numpy()
+                inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
+            else:
+                SR = data['SR'].to_numpy()
+                inter = interp1d(cost, SR, kind='linear', fill_value="extrapolate")
+            # inter = interp1d(cost, SR, kind='linear', fill_value=np.nan, bounds_error=False)
             cost_collection.append(cost)
             inter_collection.append(inter)
 
@@ -121,10 +125,12 @@ for kk in range(1):
         ll = axs[1].plot(cost_x, mean + add_dic[data_name], ls=Dic[methods_name][-1], color=Dic[methods_name][0],
                     label=Dic[methods_name][2],
                     marker=Dic[methods_name][1], markersize=12,markevery=60)
-        axs[1].fill_between(cost_x,
-                        mean + add_dic[data_name] - 0.96 * var,
-                        mean + add_dic[data_name] + 0.96 * var,
-                        alpha=0.05, color=Dic[methods_name][0])
+        # axs[1].fill_between(cost_x,
+        #                 mean + add_dic[data_name] - 0.96 * var,
+        #                 mean + add_dic[data_name] + 0.96 * var,
+        #                 alpha=0.05, color=Dic[methods_name][0])
+    axs[1].set_xscale('log')
+    axs[1].set_ylim(lim_y[data_name][0], lim_y[data_name][1])
     axs[1].grid()
 
 lines, labels = axs[0].get_legend_handles_labels()
