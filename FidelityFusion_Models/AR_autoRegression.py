@@ -150,7 +150,7 @@ if __name__ == "__main__":
     # debugger=log_debugger("AR")
 
     # generate the data
-    x_all = torch.rand(500, 1) * 20
+    x_all = torch.rand(500, 1) * 3
     xlow_indices = torch.randperm(500)[:300]
     xlow_indices = torch.sort(xlow_indices).values
     x_low = x_all[xlow_indices]
@@ -160,12 +160,12 @@ if __name__ == "__main__":
     xhigh2_indices = torch.randperm(500)[:250]
     xhigh2_indices = torch.sort(xhigh2_indices).values
     x_high2 = x_all[xhigh2_indices]
-    x_test = torch.linspace(0, 20, 100).reshape(-1, 1)
+    x_test = torch.linspace(0, 3, 100).reshape(-1, 1)
 
-    y_low = torch.sin(x_low) - 0.5 * torch.sin(2 * x_low) + torch.rand(300, 1) * 0.1 - 0.05
-    y_high1 = torch.sin(x_high1) - 0.3 * torch.sin(2 * x_high1) + torch.rand(300, 1) * 0.1 - 0.05
-    y_high2 = torch.sin(x_high2) + torch.rand(250, 1) * 0.1 - 0.05
-    y_test = torch.sin(x_test)
+    y_low = torch.sin(2*torch.pi*x_low) * (1-torch.exp(torch.tensor(-3 * 0.2))) + torch.rand(300, 1) * 0.01 - 0.005
+    y_high1 = torch.sin(2*torch.pi*x_high1) * (1-torch.exp(torch.tensor(-3 * 0.5))) + torch.rand(300, 1) * 0.01 - 0.005
+    y_high2 = torch.sin(2*torch.pi*x_high2) + torch.rand(250, 1) * 0.01 - 0.005
+    y_test = torch.sin(2*torch.pi*x_test)
 
     initial_data = [
         {'raw_fidelity_name': '0','fidelity_indicator': 0, 'X': x_low.to(device), 'Y': y_low.to(device)},
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     myAR = AR(fidelity_num = fidelity_num, kernel_list = kernel_list, rho_init=1.0, if_nonsubset=False).to(device)
 
     ## if nonsubset is False, max_iter should be 100 ,lr can be 1e-2
-    train_AR(myAR, fidelity_manager, max_iter=200, lr_init=1e-2, debugger = None)
+    train_AR(myAR, fidelity_manager, max_iter=200, lr_init=3e-2, debugger = None)
 
     # debugger.logger.info('training finished,start predicting')
     with torch.no_grad():
@@ -192,4 +192,5 @@ if __name__ == "__main__":
     plt.errorbar(x_test.flatten(), ypred.reshape(-1).detach(), ypred_var.diag().sqrt().squeeze().detach(), fmt='r-.' ,alpha = 0.2)
     plt.fill_between(x_test.flatten(), ypred.reshape(-1).detach() - ypred_var.diag().sqrt().squeeze().detach(), ypred.reshape(-1).detach() + ypred_var.diag().sqrt().squeeze().detach(), alpha = 0.2)
     plt.plot(x_test.flatten(), y_test, 'k+')
-    plt.show() 
+    # plt.show() 
+    plt.savefig('AR_demo.png')
