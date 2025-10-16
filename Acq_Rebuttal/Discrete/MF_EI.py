@@ -24,7 +24,7 @@ class expected_improvement(nn.Module):
         var_mifi_inverse = 0
         mu_var = 0
         for fi in range(self.fidelity_num):
-            # x = self.data_manager.normalizelayer[fi].normalize_x(x)
+            
             if self.x_norm != None:
                 try:
                     x1 = self.x_norm[fi].normalize(x)
@@ -38,7 +38,7 @@ class expected_improvement(nn.Module):
                     mu = self.y_norm[fi].denormalize(mu)
                 except:
                     mu = self.y_norm.denormalize(mu)
-            # mu, var = self.data_manager.normalizelayer[fi].denormalize(mu, var)
+            
             var_mifi_inverse += 1 / var
             mu_var += mu / var
 
@@ -51,7 +51,7 @@ class expected_improvement(nn.Module):
 
         mu_mifi, var_mifi  = self.calculate_muti_muvar(x)
 
-        if self.model_name in ['CMF_CAR','GP','CMF_CAR_dkl']:
+        if self.model_name in ['CMF_CAR','GP']:
             y = self.data_manager.get_data(0, normal = False)[1]
             if self.y_norm != None:
                 y_norm = self.y_norm.denormalize(y)
@@ -66,7 +66,6 @@ class expected_improvement(nn.Module):
                     y_fi_norm = y_fi
                 max_fi.append(max(y_fi_norm))
             y_max = max(max_fi)
-        # test_x = self.data_manager.normalizelayer[self.GP_model.fidelity_num-1].normalize_x(x)
 
         std_var_mifi = torch.sqrt(var_mifi)
             

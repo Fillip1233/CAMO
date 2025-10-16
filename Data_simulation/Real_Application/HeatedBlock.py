@@ -4,9 +4,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..
 import torch
 import numpy as np
 
-from Data_simulation.Cost_Function.cost_pow_10 import cost_discrete as cost_pow_10
-from Data_simulation.Cost_Function.cost_linear import cost_discrete as cost_linear
-from Data_simulation.Cost_Function.cost_log import cost_discrete as cost_log
+from Data_simulation.Cost_Function.cost_pow_10 import cost as cost_pow_10
+from Data_simulation.Cost_Function.cost_linear import cost as cost_linear
+from Data_simulation.Cost_Function.cost_log import cost as cost_log
 
 import matlab
 import matlab.engine
@@ -19,13 +19,10 @@ class HeatedBlock:
         self.x_dim = 3
         self.flevels = 2
         self.maximum = 2.0
-        # self.bounds = ((0.1,0.4), (0.1,0.4),(0,2*np.pi))
         self.search_range = [[0.1, 0.4], [0.1, 0.4], [0, 2*np.pi],[0, 1]]
         self.cost = cost_list[cost_type](self.search_range[-1])
         self.eng = matlab.engine.start_matlab()
         self.eng.addpath(r'/home/fillip/桌面/CAMO/Data_simulation/Real_Application', nargout=0)
-        # self.lb = torch.tensor([bound[0] for bound in self.bounds])
-        # self.ub = torch.tensor([bound[1] for bound in self.bounds])
     
     def get_data(self, input_x, input_s):
         if isinstance(input_x, torch.Tensor):
@@ -60,8 +57,6 @@ class HeatedBlock:
             low.append(tt)
         xtr_low = torch.cat(low, dim=1)
 
-        # fidelity_indicator1 = torch.ones(index[0], 1) * 0
-        # ytr_low = self.get_data(xtr_low, fidelity_indicator1).reshape(index[0], 1)
         ytr_low = self.get_data(xtr_low, torch.tensor(0.)).reshape(index[0], 1)
         
         torch.manual_seed(seed+3)
@@ -71,9 +66,6 @@ class HeatedBlock:
             high.append(tt)
         xtr_high = torch.cat(high, dim=1)
 
-        # fidelity_indicator3 = torch.ones(index[1], 1) * 1
-
-        # ytr_high = self.get_data(xtr_high, fidelity_indicator3).reshape(index[1], 1)
         ytr_high = self.get_data(xtr_high, torch.tensor(1.)).reshape(index[1], 1)
         
         xtr = [xtr_low, xtr_high]
@@ -94,12 +86,6 @@ class HeatedBlock:
             tem.append(tt)
 
         x = torch.cat(tem, dim = 1)
-        # fidelity_indicator = torch.ones(num_points, 1)
-        
-        # y = self.get_data(x, torch.tensor(1.))
-        
-        # Find the maximum value and its index
-        # max_value, max_index = torch.max(y, dim=0)
 
         max_value = torch.tensor(self.maximum)
 

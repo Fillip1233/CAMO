@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-class cost_discrete():
+class cost():
     def __init__(self, fidelity_range):
         self.s_min = fidelity_range[0]
         self.s_max = fidelity_range[-1]

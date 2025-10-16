@@ -6,7 +6,6 @@ import torch.nn as nn
 import GaussianProcess.kernel as kernel
 from GaussianProcess.cigp_v10 import cigp as GPR
 from FidelityFusion_Models.MF_data import MultiFidelityDataManager
-# from Experiments.log_debugger import log_debugger
 import matplotlib.pyplot as plt
 
 class AR(nn.Module):
@@ -147,7 +146,6 @@ if __name__ == "__main__":
     torch.manual_seed(1)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # device = torch.device("cpu")
-    # debugger=log_debugger("AR")
 
     # generate the data
     x_all = torch.rand(500, 1) * 3
@@ -181,13 +179,11 @@ if __name__ == "__main__":
     ## if nonsubset is False, max_iter should be 100 ,lr can be 1e-2
     train_AR(myAR, fidelity_manager, max_iter=200, lr_init=3e-2, debugger = None)
 
-    # debugger.logger.info('training finished,start predicting')
     with torch.no_grad():
         x_test = fidelity_manager.normalizelayer[myAR.fidelity_num-1].normalize_x(x_test)
         ypred, ypred_var = myAR(fidelity_manager,x_test)
         ypred, ypred_var = fidelity_manager.normalizelayer[myAR.fidelity_num-1].denormalize(ypred, ypred_var)
 
-    # debugger.logger.info('prepare to plot')
     plt.figure()
     plt.errorbar(x_test.flatten(), ypred.reshape(-1).detach(), ypred_var.diag().sqrt().squeeze().detach(), fmt='r-.' ,alpha = 0.2)
     plt.fill_between(x_test.flatten(), ypred.reshape(-1).detach() - ypred_var.diag().sqrt().squeeze().detach(), ypred.reshape(-1).detach() + ypred_var.diag().sqrt().squeeze().detach(), alpha = 0.2)

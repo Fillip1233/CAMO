@@ -4,8 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import torch
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split,cross_val_score
-from Data.cost_pow_10 import cost_discrete as cost_pow_10
-from Data.cost_log import cost_discrete as cost_log
+from Data_simulation.Cost_Function.cost_pow_10 import cost as cost_pow_10
+from Data_simulation.Cost_Function.cost_log import cost as cost_log
 from sklearn import datasets
 from pandas import read_csv
 from sklearn import preprocessing
@@ -20,7 +20,7 @@ class RF_Regressor():
         self.cost = cost_list['log'](self.search_range[-1])
         self.fi_num = total_fidelity_num
         column_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
-        data = read_csv('/home/fillip/桌面/Hyperparameter-Optimization-of-Machine-Learning-Algorithms/input/housing.csv', header=None, delimiter=r"\s+", names=column_names)
+        data = read_csv('/home/fillip/桌面/CAMO/Data_simulation/Real_Application/housing.csv', header=None, delimiter=r"\s+", names=column_names)
         min_max_scaler = preprocessing.MinMaxScaler()
         column_sels = ['LSTAT', 'INDUS', 'NOX', 'PTRATIO', 'RM', 'TAX', 'DIS', 'AGE']
         x = data.loc[:,column_sels]

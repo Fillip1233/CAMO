@@ -4,10 +4,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import torch
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split,cross_val_score
-from Data.cost_pow_10 import cost_discrete as cost_pow_10
-from Data.cost_log import cost_discrete as cost_log
+from Data_simulation.Cost_Function.cost_pow_10 import cost as cost_pow_10
+from Data_simulation.Cost_Function.cost_log import cost as cost_log
 from sklearn import datasets
 cost_list = {'pow_10': cost_pow_10, 'log': cost_log}
+
 class RF_Classifier():
     def __init__(self, total_fidelity_num):
         self.x_dim = 5

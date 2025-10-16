@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..')))
 from FidelityFusion_Models import *
 from FidelityFusion_Models.GP_DMF import *
-MF_model_list = {'CMF_CAR': ContinuousAutoRegression_large, 'CMF_CAR_dkl': CMF_CAR_dkl, "GP": cigp,
+MF_model_list = {'CMF_CAR': ContinuousAutoRegression_large, "GP": cigp,
                  'ResGP': ResGP, 'AR': AR}
 
 class discrete_fidelity_knowledgement_gradient(torch.nn.Module):
@@ -27,10 +27,8 @@ class discrete_fidelity_knowledgement_gradient(torch.nn.Module):
     def negative_cfkg(self, x, s):
 
         xall = torch.rand(100, self.x_dim,dtype=torch.float64) * (self.search_range[1] - self.search_range[0]) + self.search_range[0]
-        # mean_y, sigma_y = self.GP_model_pre(xall, self.total_fid_num)  # 预测最高精度
-        # xall = self.data_manager.normalizelayer[self.GP_model_pre.fidelity_num-1].normalize_x(xall)
         with torch.no_grad():
-            if self.model_name in ['CMF_CAR','GP','CMF_CAR_dkl']:
+            if self.model_name in ['CMF_CAR','GP']:
                 if self.x_norm != None:
                     xall1 = self.x_norm.normalize(xall)
                 else:
@@ -46,7 +44,7 @@ class discrete_fidelity_knowledgement_gradient(torch.nn.Module):
                 mu_pre, var_pre = self.GP_model_pre(self.data_manager, xall1, normal = False)
                 if self.y_norm != None:
                     mu_pre = self.y_norm[-1].denormalize(mu_pre)
-        # mu_pre, var_pre = self.data_manager.normalizelayer[self.GP_model_pre.fidelity_num-1].denormalize(mu_pre, var_pre)
+
         max_pre = torch.max(mu_pre)
         
         x = x.reshape(1,-1)
@@ -61,7 +59,7 @@ class discrete_fidelity_knowledgement_gradient(torch.nn.Module):
                 x1 = x
             ypred, _ = self.GP_model_pre(self.data_manager, x1, s, normal = False)
         
-        if self.model_name in ['CMF_CAR','GP','CMF_CAR_dkl']:
+        if self.model_name in ['CMF_CAR','GP']:
             x1 = torch.cat((x1, torch.tensor([[s]], dtype=torch.float64)),dim = 1)
             self.data_manager.add_data(raw_fidelity_name = '0',fidelity_index= 0 , x = x1, y=ypred)
         else:
@@ -70,25 +68,19 @@ class discrete_fidelity_knowledgement_gradient(torch.nn.Module):
         print('train new GP model')
         kernel_init1 = kernel.SquaredExponentialKernel(length_scale=1., signal_variance=1.)
         kernel_init2 = [kernel.SquaredExponentialKernel(length_scale = 1., signal_variance = 1.) for _ in range(self.fidelity_num)]
+        
         if self.model_name == 'ResGP':
             GP_model_new = MF_model_list['ResGP'](fidelity_num = self.fidelity_num, kernel_list = kernel_init2, if_nonsubset = True)
             train_ResGP(GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
+
         elif self.model_name == 'AR':
             GP_model_new = MF_model_list['AR'](fidelity_num = self.fidelity_num, kernel_list = kernel_init2, if_nonsubset = True)
             train_AR(GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
-        # elif self.model_name == 'CAR':
-        #     train_CAR(self.GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
-        # elif self.model_name == 'DMF_CAR':
-        #     train_DMFCAR(self.GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
-        # elif self.model_name == 'DMF_CAR_dkl':
-        #     train_DMFCAR_dkl(self.GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
         
         elif self.model_name == 'CMF_CAR':
             GP_model_new = MF_model_list['CMF_CAR'](kernel_x=kernel_init1)
             train_CAR_large(GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
-        elif self.model_name == 'CMF_CAR_dkl':
-            GP_model_new = MF_model_list['CMF_CAR_dkl'](input_dim=x.shape[1], kernel_x=kernel_init1)
-            train_CMFCAR_dkl(GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)
+
         elif self.model_name == 'GP':
             GP_model_new = MF_model_list['GP'](kernel=kernel_init1, log_beta=1.0)
             train_GP(GP_model_new, self.data_manager, max_iter=200, lr_init=1e-2, normal=False)

@@ -130,7 +130,6 @@ def train_GAR(GARmodel, data_manager, max_iter=1000, lr_init=1e-1, normal = True
 if __name__ == "__main__":
     torch.manual_seed(1)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # debugger=log_debugger("GAR")
 
     x = np.load('assets/MF_data/Poisson_data/input.npy')
     x = torch.tensor(x, dtype=torch.float32)
@@ -165,13 +164,11 @@ if __name__ == "__main__":
 
     train_GAR(myGAR, fidelity_manager, max_iter = 100, lr_init = 1e-3, debugger = None)
 
-    # debugger.logger.info('training finished,start predicting')
     with torch.no_grad():
         x_test = fidelity_manager.normalizelayer[myGAR.fidelity_num-1].normalize_x(x_test)
         ypred, ypred_var = myGAR(fidelity_manager, x_test)
         ypred, ypred_var = fidelity_manager.normalizelayer[myGAR.fidelity_num-1].denormalize(ypred, ypred_var)
 
-    # debugger.logger.info('prepare to plot')
     ##plot the results
     fig, axs = plt.subplots(1, 3, figsize=(15, 5))
     yte = y_test

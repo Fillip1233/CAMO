@@ -55,8 +55,8 @@ class upper_confidence_bound_continuous(nn.Module):
         return gamma_z
 
     def negative_ucb(self):
-        # mean, var = self.pre_func(self.x, torch.ones(1).reshape(-1, 1)*self.search_range[-1][-1])
-        x_in = torch.cat((self.x, torch.ones(1).reshape(-1, 1)*(self.search_range[-1][-1]+1)), dim=1)
+        
+        x_in = torch.cat((self.x, torch.ones(1).reshape(-1, 1)*(self.search_range[-1][-1])), dim=1)
         x_in1 = self.x_norm.normalize(x_in)
         mean, var = self.pre_func(self.data_manager, x_in1)
         mean = self.y_norm.denormalize(mean)
@@ -95,7 +95,7 @@ class upper_confidence_bound_continuous(nn.Module):
         tau_z_std = []
         for z in self.z_range:
             z = z.reshape(-1, 1)
-            x_te = torch.cat((new_x, z+1), dim=1)
+            x_te = torch.cat((new_x, z), dim=1)
             x_te = self.x_norm.normalize(x_te)
             m, v = self.pre_func(self.data_manager, x_te)
             m = self.y_norm.denormalize(m)
@@ -116,8 +116,5 @@ class upper_confidence_bound_continuous(nn.Module):
             new_s = 0.1
         else:
             new_s = min(possible_z)
-
-        # if isinstance(new_x, torch.Tensor):
-        #     new_x = new_x.detach().numpy()
 
         return new_x, new_s

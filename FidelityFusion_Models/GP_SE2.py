@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import GaussianProcess.kernel as kernel
 from GaussianProcess.cigp_v10 import cigp as GPR
-from MF_model.MF_data import MultiFidelityDataManager
+from FidelityFusion_Models.MF_data import MultiFidelityDataManager
 import matplotlib.pyplot as plt
 
 class fidelity_kernel(nn.Module):

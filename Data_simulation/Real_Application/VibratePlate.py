@@ -4,9 +4,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..
 import torch
 import numpy as np
 
-from Data_simulation.Cost_Function.cost_pow_10 import cost_discrete as cost_pow_10
-from Data_simulation.Cost_Function.cost_linear import cost_discrete as cost_linear
-from Data_simulation.Cost_Function.cost_log import cost_discrete as cost_log
+from Data_simulation.Cost_Function.cost_pow_10 import cost as cost_pow_10
+from Data_simulation.Cost_Function.cost_linear import cost as cost_linear
+from Data_simulation.Cost_Function.cost_log import cost as cost_log
 
 import matlab
 import matlab.engine
