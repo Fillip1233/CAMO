@@ -11,7 +11,7 @@ import torch
 from FidelityFusion_Models.MF_data import min_max_normalizer_2
 from FidelityFusion_Models.CMF_CAR import *
 from FidelityFusion_Models.GP_DMF import *
-from Acq_Rebuttal.Continue import *
+from Acquisition_Rebuttal.Continue import *
 import GaussianProcess.kernel as kernel
 import time
 import random

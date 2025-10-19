@@ -9,7 +9,7 @@ from FidelityFusion_Models.CMF_CAR import *
 from Data_simulation.Synthetic_MF_Function import *
 import GaussianProcess.kernel as kernel
 from GaussianProcess.cigp_v10 import *
-from Acq_Rebuttal.Continue import *
+from Acquisition_Rebuttal.Continue import *
 from FidelityFusion_Models.GP_DMF import *
 from sklearn.metrics import mean_squared_error, r2_score
 from FidelityFusion_Models.MF_data import min_max_normalizer_2

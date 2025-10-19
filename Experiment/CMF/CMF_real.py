@@ -8,7 +8,7 @@ import logging
 from FidelityFusion_Models.CMF_CAR import *
 from Data_simulation.Synthetic_MF_Function import *
 import GaussianProcess.kernel as kernel
-from Acq_Rebuttal.Continue import *
+from Acquisition_Rebuttal.Continue import *
 from FidelityFusion_Models.GP_DMF import *
 from FidelityFusion_Models.MF_data import min_max_normalizer_2
 from Data_simulation.Real_Application.HeatedBlock import HeatedBlock

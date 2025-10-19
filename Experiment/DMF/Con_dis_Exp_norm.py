@@ -8,7 +8,7 @@ import logging
 from FidelityFusion_Models import *
 from Data_simulation.Synthetic_MF_Function import *
 import GaussianProcess.kernel as kernel
-from Acq_Rebuttal.Discrete import *
+from Acquisition_Rebuttal.Discrete import *
 from sklearn.metrics import mean_squared_error, r2_score
 from FidelityFusion_Models.MF_data import min_max_normalizer_2
 import argparse
@@ -50,7 +50,7 @@ def MF_BO_discrete(exp_config):
         x_normer_list = [min_max_normalizer_2(xtr[i], columns=[0, 1], min_value=0, max_value=total_fidelity_num - 1) for i in range(total_fidelity_num)]
     else:
         x_normer_list = [min_max_normalizer_2(xtr[i], columns=[0], min_value=0, max_value=total_fidelity_num - 1) for i in range(total_fidelity_num)]
-        
+
     y_normer_list = [min_max_normalizer_2(ytr[i], columns=[0], min_value=0, max_value=total_fidelity_num - 1) for i in range(total_fidelity_num)]
     for i in range(total_fidelity_num):
         xtr[i] = x_normer_list[i].normalize(xtr[i])
